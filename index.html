@@ -264,8 +264,8 @@ img,svg{max-width:100%}
 .prin>div{display:flex;flex-direction:column;gap:14px;border-top:2px solid var(--white);padding-top:18px}
 
 /* IW player */
-.iwp{position:fixed;right:16px;bottom:16px;z-index:70;width:340px;max-width:calc(100vw - 32px);background:var(--black);color:var(--white);border:2px solid var(--black);display:none;flex-direction:column;user-select:none}
-.iwp.on{display:flex}
+.iwp{position:fixed;right:16px;bottom:16px;z-index:70;width:340px;max-width:calc(100vw - 32px);background:var(--black);color:var(--white);border:2px solid var(--black);display:flex;flex-direction:column;user-select:none;transform-origin:100% 100%;transform:translateY(14px) scale(.55);opacity:0;visibility:hidden;pointer-events:none;transition:transform .42s cubic-bezier(.2,.9,.25,1),opacity .22s ease,visibility 0s linear .42s}
+.iwp.on{transform:none;opacity:1;visibility:visible;pointer-events:auto;transition:transform .46s cubic-bezier(.2,.9,.25,1),opacity .2s ease,visibility 0s}
 .iwp-bar{display:flex;align-items:center;gap:6px;height:30px;padding:0 4px 0 10px;cursor:grab;touch-action:none}
 .iwp-bar .lbl{flex:1;font-size:11px;letter-spacing:.12em}
 .iwp-sq{width:24px;height:22px;border:2px solid var(--white);background:transparent;color:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
@@ -311,7 +311,9 @@ img,svg{max-width:100%}
 .iwp-launch:hover{background:var(--lime);color:var(--black)}
 .iwp-launch i{display:block;width:8px;height:18px;border-radius:50%;background:currentColor}
 .iwp-launch i:nth-child(2){width:12px}.iwp-launch i:nth-child(3){width:18px}
-.iwp.on~.iwp-launch{display:none}
+.iwp-launch{transform-origin:100% 100%;transition:opacity .2s ease .18s,transform .3s cubic-bezier(.2,.9,.25,1) .18s,visibility 0s}
+.iwp.on~.iwp-launch{opacity:0;transform:scale(.85);visibility:hidden;pointer-events:none;transition:opacity .15s ease,transform .2s ease,visibility 0s linear .2s}
+@media (prefers-reduced-motion:reduce){.iwp,.iwp.on,.iwp-launch,.iwp.on~.iwp-launch{transition:none}}
 
 /* brand marks */
 .art{display:block;height:auto}
@@ -509,6 +511,7 @@ var T = {
   ticker:[['en','Internet Wedding'],['en','Independent record label'],['en','Istanbul'],['en','Out now:'],['tr','Lavlandık, Sevdiğimiz Şeyler']],
   releases:'Releases', artists:'Artists', roster:'Roster',
   work:'How we work',
+  whatWeDo:'What we do',
   workText:'Every project starts with a conversation about what the artist actually needs. Then we write a plan together and get to work. Some artists come to us for a producer, some for a distributor. Most need a bit of everything.',
   cols:[['Production',['Recording and arrangement','Mixing and mastering']],['Release',['Release planning','Digital distribution','Rights and royalty registration','Contracts']],['Agency',['Creative direction','Visual identity, cover art and video','Campaigns and social media','Management and booking','Partnerships']]],
   about:'About',
@@ -564,6 +567,7 @@ var T = {
   ticker:[['en','Internet Wedding'],['tr','Bağımsız plak şirketi'],['tr','İstanbul'],['tr','Şimdi yayında:'],['tr','Lavlandık, Sevdiğimiz Şeyler']],
   releases:'Yayınlar', artists:'Sanatçılar', roster:'Kadro',
   work:'Nasıl çalışıyoruz',
+  whatWeDo:'Ne yapıyoruz',
   workText:'Her proje, sanatçının gerçekten neye ihtiyacı olduğunu konuştuğumuz bir görüşmeyle başlar. Sonra birlikte bir plan yazıp işe koyuluruz. Kimi sanatçı bize prodüktör için gelir, kimi dağıtım için. Çoğunun biraz her şeye ihtiyacı olur.',
   cols:[['Prodüksiyon',['Kayıt ve aranje','Miks ve mastering']],['Yayın',['Yayın planı','Dijital dağıtım','Hak ve telif kayıtları','Sözleşmeler']],['Ajans',['Kreatif yönetim','Görsel kimlik, kapak ve video','Kampanya ve sosyal medya','Menajerlik ve booking','İş birlikleri']]],
   about:'Hakkında',
@@ -849,7 +853,7 @@ function home(){
   +Object.keys(ARTISTS).map(function(k){var a=ARTISTS[k];return '<a class="rrow rv" href="#artist-'+k+'"><span class="hd rname" lang="'+a.nl+'">'+esc(a.name)+'</span><span class="lbl rmeta mute"><span>'+esc(L(a.city))+'</span><span>'+esc(L(a.genre))+'</span></span></a>'}).join('')
   +'<div class="end"></div></div></div></section>'
   +'<section id="work" style="border-bottom:2px solid var(--black)"><div class="in" style="padding-top:72px;padding-bottom:80px;display:flex;flex-direction:column;gap:28px">'
-  +'<h2 class="hd h2 rv">'+x.work+'</h2><p class="rv" style="margin:0;font-size:19px;line-height:1.45;max-width:52ch">'+x.workText+'</p>'
+  +'<div class="lbl rv" style="display:flex;justify-content:space-between;gap:16px"><span>'+x.whatWeDo+'</span><a href="#about">'+x.work+' →</a></div>'
   +'<div class="svc">'+x.cols.map(function(c){return '<div class="svc-row rv"><h3 class="hd">'+c[0]+'</h3><p>'+c[1].map(function(s,i){return i?s.charAt(0).toLocaleLowerCase(lang==='tr'?'tr':'en')+s.slice(1):s}).join(', ')+'</p></div>'}).join('')+'</div>'
   +'</div></section>'
   +'<div class="band" aria-hidden="true"><div class="in"><div class="rv">'+iwPat({kind:'sapma',per:1.6,slope:0.5,w:1200,h:232,rows:5,fg:'#FFFFFF',seed:12,cls:'wide'})+'</div></div></div>'
