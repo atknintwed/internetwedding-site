@@ -108,6 +108,7 @@ img,svg{max-width:100%}
 .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:24px}
 .vbox{aspect-ratio:16/9;border:2px solid var(--black);background:var(--black)}
 .vbox iframe{width:100%;height:100%;border:0;display:block}
+textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;padding-top:12px;padding-bottom:12px}
 .tile-sub{font-size:15px;color:var(--mute);margin-top:2px}
 .cover .t{font-size:24px;line-height:1.05;letter-spacing:-.01em}
 .tile-meta{display:flex;justify-content:space-between;gap:12px;border-top:2px solid var(--black);padding-top:10px}
@@ -552,7 +553,7 @@ var T = {
   months:['January','February','March','April','May','June','July','August','September','October','November','December'],
   apply:{lbl:'Submissions',h:'Send us your music',intro:'We listen to everything we receive. Fill this in and we’ll get back to you by email.',
     you:'About you', youText:'Enough for us to find you and your music.',
-    name:'Artist or band name', link:'Link to your music', linkHint:'Spotify, SoundCloud, Bandcamp or a private link', email:'Email', req:'Required',
+    name:'Artist or band name', msg:'In your own words', msgHint:'Tell us about you and the music: what it’s about, where it’s going, what you need from us.', link:'Link to your music', linkHint:'Spotify, SoundCloud, Bandcamp or a private link', email:'Email', req:'Required',
     needs:'What do you need?', needsText:'Not sure? Leave it blank. Working that out together is part of what we do.',
     n:[['Production','Recording, arrangement, mixing and mastering.'],['Release and distribution','Release planning and distribution, with rights registration.'],['Agency','Creative direction, visual identity, video and campaigns, plus management and booking.']],
     img:'Image', imgText:'Cover art or an artist photo. Optional.', upload:'Upload an image', uploadHint:'JPG or PNG, at least 1000 px',
@@ -609,7 +610,7 @@ var T = {
   months:['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
   apply:{lbl:'Başvurular',h:'Müziğini gönder',intro:'Gelen her şeyi dinliyoruz. Formu doldur, sana e-postayla dönelim.',
     you:'Seni tanıyalım', youText:'Seni ve müziğini bulmamıza yetecek kadar bilgi.',
-    name:'Sanatçı ya da grup adı', link:'Müziğinin linki', linkHint:'Spotify, SoundCloud, Bandcamp ya da özel bir link', email:'E-posta', req:'Zorunlu',
+    name:'Sanatçı ya da grup adı', msg:'Kendi sözlerinle', msgHint:'Bize kendinden ve müziğinden bahset: ne anlatıyor, nereye gidiyor, bizden ne bekliyorsun.', link:'Müziğinin linki', linkHint:'Spotify, SoundCloud, Bandcamp ya da özel bir link', email:'E-posta', req:'Zorunlu',
     needs:'Neye ihtiyacın var?', needsText:'Emin değilsen boş bırak. Bunu birlikte bulmak işimizin bir parçası.',
     n:[['Prodüksiyon','Kayıt, aranje, miks ve mastering.'],['Yayın ve dağıtım','Yayın planı ve dağıtım, hak kayıtlarıyla birlikte.'],['Ajans','Kreatif yönetim, görsel kimlik, video ve kampanya; menajerlik ve booking da dahil.']],
     img:'Görsel', imgText:'Kapak ya da sanatçı fotoğrafı. İsteğe bağlı.', upload:'Görsel yükle', uploadHint:'JPG ya da PNG, en az 1000 px',
@@ -1154,6 +1155,7 @@ function apply(){
   +fld('f-name','text',x.name,'',x.req,'organization')
   +fld('f-link','url',x.link,x.linkHint,x.req,'url')
   +fld('f-email','email',x.email,'',x.req,'email')
+  +'<div class="fld"><label for="f-msg">'+x.msg+'<span class="req">'+x.opt+'</span></label><span class="mute" style="font-size:14px" id="f-msg-h">'+x.msgHint+'</span><textarea class="tx" id="f-msg" rows="6" maxlength="3000" aria-describedby="f-msg-h"></textarea></div>'
   +'</div></div>'
   +'<div class="block rv"><div><h2 class="bh">'+x.needs+'</h2><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.needsText+'</p></div><div style="display:flex;flex-direction:column;gap:14px;min-width:0">'
   +x.n.map(function(n,i){return '<label class="ck" for="need'+i+'"><input type="checkbox" id="need'+i+'"><span><b style="font-weight:500">'+n[0]+'</b><br><span class="mute" style="font-size:14px">'+n[1]+'</span></span></label>'}).join('')
@@ -1181,7 +1183,7 @@ function bindApply(){
     var needs=[].slice.call(f.querySelectorAll('[id^=need]:checked')).map(function(c){return c.parentNode.querySelector('b').textContent});
     var fd=new FormData(), v=function(id){return document.getElementById(id).value.trim()}, img=document.getElementById('f-img').files[0];
     fd.append('_subject','Submit Music: '+v('f-name'));fd.append('_template','table');fd.append('_captcha','false');fd.append('_replyto',v('f-email'));
-    fd.append('Artist',v('f-name'));fd.append('Music link',v('f-link'));fd.append('Email',v('f-email'));fd.append('Needs',needs.join(', ')||'-');fd.append('Newsletter',document.getElementById('f-nl').checked?'Yes':'No');fd.append('Language',lang);
+    fd.append('Artist',v('f-name'));fd.append('Music link',v('f-link'));fd.append('Email',v('f-email'));fd.append('Message',v('f-msg')||'-');fd.append('Needs',needs.join(', ')||'-');fd.append('Newsletter',document.getElementById('f-nl').checked?'Yes':'No');fd.append('Language',lang);
     if(img) fd.append('attachment',img,img.name);
     fd.append('_honey','');
     fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
