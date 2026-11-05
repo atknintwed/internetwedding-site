@@ -105,6 +105,9 @@ img,svg{max-width:100%}
 .tile:hover .cover{transform:translateY(-6px)}
 .cover.cimg{padding:0;overflow:hidden;background:var(--black)}
 .cimg img,.sq img,.sw img{width:100%;height:100%;object-fit:cover;display:block}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:24px}
+.vbox{aspect-ratio:16/9;border:2px solid var(--black);background:var(--black)}
+.vbox iframe{width:100%;height:100%;border:0;display:block}
 .tile-sub{font-size:15px;color:var(--mute);margin-top:2px}
 .cover .t{font-size:24px;line-height:1.05;letter-spacing:-.01em}
 .tile-meta{display:flex;justify-content:space-between;gap:12px;border-top:2px solid var(--black);padding-top:10px}
@@ -519,6 +522,7 @@ var T = {
   aP2:'We work with independent artists wherever they live and whatever language they sing in. Their records are made against the odds, and too often they disappear into the digital noise for lack of resources. The meaning the artist put into the work goes with them, and so does the care their rights deserve.',
   aP3:'So we join a project wherever the artist needs us. Sometimes that means running the release, sometimes the creative work around it. Their rights and intent come first.',
   aPrinciples:'Where we start', aBig:'The work belongs to the person who made it. Every plan starts there.', aPr:[['Without borders','Where an artist lives or which language they sing in does not decide where the music can go.'],['Rights first','The work belongs to the person who made it. Every plan starts from there.'],['Built per artist','No fixed package. We look at what the project needs and draw the roadmap together.']],
+  mvids:'Music videos',
   watch:'Watch', watchText:'Videos and live sessions', playHere:'Play in the IW player', playerLbl:'IW player', preview:'Preview', nowPlaying:'Now playing', queue:'Queue', minimise:'Minimise', expand:'Expand', closeP:'Close player', prev:'Previous', next:'Next', play:'Play', pause:'Pause', stop:'Stop', seek:'Position', volume:'Volume', listToggle:'Show queue', demoNote:'', catTitle:'Catalogue', fAll:'All', fAlbum:'Albums', fEp:'EPs', vGrid:'Grid', vList:'List', vLbl:'View', fLbl:'Show', seeAll:'All releases', prevRel:'Previous release', nextRel:'Next release', prevArt:'Previous artist', nextArt:'Next artist', count:' releases', tba:'TBA',
   cta:'Submit music',
   meta:['Independent record label','Istanbul'],
@@ -555,7 +559,7 @@ var T = {
     opt:'Optional', nl:'Send me the newsletter',
     send:'Send', sendText:'We reply by email.', submit:'Send submission', cancel:'Cancel',
     eName:'Add your artist or band name.', eLink:'Add a link where we can hear your music.', eEmail:'Add an email address we can reply to, like name@example.com.',
-    ok:'Thanks. This is a preview of the site, so the form doesn’t send anything yet.'}
+    ok:'Thanks, your submission is in. We listen to everything and will write back if it’s a fit.', sending:'Sending…', fail:'Something went wrong and it didn’t send. Please try again, or email us at atakan@internetweddingmusic.com.'}
  },
  tr:{
   nav:{releases:'Yayınlar',artists:'Sanatçılar',work:'Nasıl çalışıyoruz',about:'Hakkında'},
@@ -575,6 +579,7 @@ var T = {
   aP2:'Nerede yaşadıklarına ya da hangi dilde söylediklerine bakmadan bağımsız sanatçılarla çalışıyoruz. Bu kayıtlar zor şartlarda üretiliyor ve çoğu zaman kaynak yetersizliği yüzünden dijital gürültüde kayboluyor. Sanatçının esere yüklediği anlam da, haklarına gösterilmesi gereken özen de onlarla birlikte gidiyor.',
   aP3:'Bu yüzden projeye sanatçının ihtiyaç duyduğu yerden dahil oluyoruz. Bazen yayını yürütüyoruz, bazen etrafındaki kreatif işi. Sanatçının hakları ve niyeti her zaman önce gelir.',
   aPrinciples:'Başladığımız yer', aBig:'Eser onu yapana aittir. Her plan buradan başlar.', aPr:[['Sınırsız','Sanatçının nerede yaşadığı ya da hangi dilde söylediği müziğin nereye gidebileceğini belirlemez.'],['Önce haklar','Eser onu yapan kişiye aittir. Her plan buradan başlar.'],['Sanatçıya göre','Hazır paket yok. Projenin neye ihtiyacı olduğuna bakıp yol haritasını birlikte çiziyoruz.']],
+  mvids:'Klipler',
   watch:'İzle', watchText:'Videolar ve canlı performanslar', playHere:'IW player’da çal', playerLbl:'IW player', preview:'Önizleme', nowPlaying:'Şimdi çalıyor', queue:'Sıra', minimise:'Küçült', expand:'Büyüt', closeP:'Player’ı kapat', prev:'Önceki', next:'Sonraki', play:'Çal', pause:'Duraklat', stop:'Durdur', seek:'Konum', volume:'Ses', listToggle:'Sırayı göster', demoNote:'', catTitle:'Katalog', fAll:'Tümü', fAlbum:'Albümler', fEp:'EP’ler', vGrid:'Izgara', vList:'Liste', vLbl:'Görünüm', fLbl:'Göster', seeAll:'Tüm yayınlar', prevRel:'Önceki yayın', nextRel:'Sonraki yayın', prevArt:'Önceki sanatçı', nextArt:'Sonraki sanatçı', count:' yayın', tba:'Yakında',
   cta:'Müzik gönder',
   meta:['Bağımsız plak şirketi','İstanbul'],
@@ -611,7 +616,7 @@ var T = {
     opt:'İsteğe bağlı', nl:'Bülteni almak istiyorum',
     send:'Gönder', sendText:'Dönüşü e-postayla yapıyoruz.', submit:'Başvuruyu gönder', cancel:'Vazgeç',
     eName:'Sanatçı ya da grup adını yaz.', eLink:'Müziğini dinleyebileceğimiz bir link ekle.', eEmail:'Sana dönebileceğimiz bir e-posta adresi yaz, örneğin ad@ornek.com.',
-    ok:'Teşekkürler. Bu sitenin önizlemesi, form henüz bir şey göndermiyor.'}
+    ok:'Teşekkürler, başvurun bize ulaştı. Gelen her şeyi dinliyoruz; uygun olursa sana yazacağız.', sending:'Gönderiliyor…', fail:'Bir sorun oldu ve gönderilemedi. Tekrar dene ya da atakan@internetweddingmusic.com adresine yaz.'}
  }
 };
 
@@ -661,7 +666,7 @@ var RELEASES = [
         tr:'İnsanlar arasındaki boşlukta olanlar ve sonsuz bir dijital dünyada kendini kaybetmek üzerine dört şarkı. Prodüksiyon makineye yaslanıyor, altındaki şarkılar ise fazlasıyla insani.'},
   tracks:[['Awful Things','4:52','single','https://internetweddingmusic.com/audio/intwed0002-01.mp3'],['I Want To Know You’re Awake','3:58','','https://internetweddingmusic.com/audio/intwed0002-02.mp3'],['loveu','3:22','','https://internetweddingmusic.com/audio/intwed0002-03.mp3'],['God’s Softest Angels','7:54','','https://internetweddingmusic.com/audio/intwed0002-04.mp3']],tll:'en',
   credits:[[{en:'Written by',tr:'Söz ve beste'},'Benedict Martin'],[{en:'Produced by',tr:'Prodüksiyon'},'These Petty Wings'],[{en:'Single',tr:'Single'},{en:'Awful Things, 5 May 2026',tr:'Awful Things, 5 Mayıs 2026'}]],links:[]},
- {id:'intwed0001',img:'https://internetweddingmusic.com/covers/intwed0001.jpg',cat:'INTWED0001',title:'All of That Wants Your Longing',tl:'en',artist:'sihr',kind:'ep',date:'2026-03-06',bg:'#1A1A1A',fg:'#FFFFFF',
+ {id:'intwed0001',videos:['p2RK-LA2q10','i_lzu6dO2DE','Txbgqhrx9-A'],img:'https://internetweddingmusic.com/covers/intwed0001.jpg',cat:'INTWED0001',title:'All of That Wants Your Longing',tl:'en',artist:'sihr',kind:'ep',date:'2026-03-06',bg:'#1A1A1A',fg:'#FFFFFF',
   text:{en:'Sihr moves into hybrid production here: electronic foundations, guitar textures, rock dynamics and rhythmic vocals. The record swings between confrontation and acceptance, carrying grief and change through funk, soul, folk and quiet jazz harmony.',
         tr:'Sihr bu EP’de hibrit prodüksiyona geçiyor: elektronik temeller, gitar dokuları, rock dinamikleri ve ritmik vokaller. Kayıt yüzleşmeyle kabul arasında gidip geliyor; yası ve değişimi funk, soul, folk ve sakin caz armonileriyle taşıyor.'},
   tracks:[['Boogieman','3:19','','https://internetweddingmusic.com/audio/intwed0001-01.mp3'],['All of That Wants Your Longing','2:39','','https://internetweddingmusic.com/audio/intwed0001-02.mp3'],['Goldenfish','3:04','','https://internetweddingmusic.com/audio/intwed0001-03.mp3'],['The Ocean is Here','1:51','','https://internetweddingmusic.com/audio/intwed0001-04.mp3'],['Home, Trees etc.','3:17','','https://internetweddingmusic.com/audio/intwed0001-05.mp3']],tll:'en',
@@ -1098,6 +1103,7 @@ function release(r){
   if(r.tracks.length) h+='<div class="rv"><span class="lbl" style="display:block;padding-bottom:8px">'+x.tracklist+'</span>'+r.tracks.map(function(tr,i){var tag=tr[2]==='single'?'<span class="chip">'+x.single+'</span>':tr[2]==='focus'?'<span class="chip on">'+x.focus+'</span>':'';return '<div class="trk"><span class="lbl mute">'+String(i+1).padStart(2,'0')+'</span><span style="font-weight:500"><span lang="'+r.tll+'">'+esc(tr[0])+'</span>'+tag+'</span><span style="font-variant-numeric:tabular-nums">'+tr[1]+'</span></div>'}).join('')+'<div class="end"></div></div>';
   h+='<div class="rv"><span class="lbl" style="display:block;padding-bottom:8px">'+x.credits+'</span>'+r.credits.map(function(c){return '<div class="kv"><span class="mute">'+L(c[0])+'</span><span>'+esc(L(c[1]))+'</span></div>'}).join('')+'<div class="end"></div></div>';
   h+='</div></section>'
+  if(r.videos&&r.videos.length) h+='<section class="in vids" style="padding-bottom:80px;display:flex;flex-direction:column;gap:16px"><div class="lbl rv" style="display:flex;justify-content:space-between;gap:16px;border-top:2px solid var(--black);padding-top:12px"><span>'+x.watch+'</span><span>'+x.mvids+'</span></div><div class="vgrid">'+r.videos.map(function(v){return '<div class="vbox rv"><iframe src="https://www.youtube-nocookie.com/embed/'+v+'?rel=0" title="'+esc(r.title)+' – YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>'}).join('')+'</div></section>';
   +'<section style="border-top:2px solid var(--black)"><div class="in" style="padding-top:56px;padding-bottom:80px;display:flex;flex-direction:column;gap:28px"><h2 class="hd rv" style="font-size:clamp(32px,4vw,56px);line-height:1">'+x.more+'</h2><div class="grid4">'+RELEASES.filter(function(o){return o!==r}).map(tile).join('')+'</div></div></section>';
   var ri=RELEASES.indexOf(r), pr=RELEASES[(ri-1+RELEASES.length)%RELEASES.length], nx=RELEASES[(ri+1)%RELEASES.length];
   h+=pager('#release-'+pr.id,x.prevRel,pr.title,pr.tl,'#release-'+nx.id,x.nextRel,nx.title,nx.tl);
@@ -1157,7 +1163,7 @@ function apply(){
   +'<div class="block rv"><div><h2 class="bh">'+x.opt+'</h2></div><div><label class="ck" for="f-nl"><input type="checkbox" id="f-nl"><span>'+x.nl+'</span></label></div></div>'
   +'<div class="block rv"><div><h2 class="bh">'+x.send+'</h2><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.sendText+'</p></div><div style="display:flex;flex-direction:column;gap:14px;min-width:0">'
   +'<div style="display:flex;gap:12px;flex-wrap:wrap"><button type="submit" class="btn dark">'+x.submit+'</button><a class="btn" href="#home">'+x.cancel+'</a></div>'
-  +'<div class="done" id="f-ok" role="status" hidden>'+x.ok+'</div></div></div><div class="end"></div></form>';
+  +'<div class="done" id="f-ok" role="status" hidden>'+x.ok+'</div><div class="done" id="f-err" role="alert" hidden style="background:var(--red);color:var(--white)">'+x.fail+'</div></div></div><div class="end"></div></form>';
   function fld(id,type,label,hint,req,ac){return '<div class="fld"><label for="'+id+'">'+label+'<span class="req">'+req+'</span></label>'+(hint?'<span class="mute" style="font-size:14px" id="'+id+'-h">'+hint+'</span>':'')+'<input class="tx" id="'+id+'" type="'+type+'" autocomplete="'+ac+'"'+(hint?' aria-describedby="'+id+'-h"':'')+'><span class="err" id="'+id+'-e"></span></div>'}
 }
 
@@ -1167,7 +1173,22 @@ function bindApply(){
   var rules={'f-name':function(v){return v.trim()?'':x.eName},'f-link':function(v){return /^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/.test(v)?'':x.eLink},'f-email':function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?'':x.eEmail}};
   function chk(id){var el=document.getElementById(id),m=rules[id](el.value);document.getElementById(id+'-e').textContent=m;el.setAttribute('aria-invalid',m?'true':'false');return !m}
   Object.keys(rules).forEach(function(id){document.getElementById(id).addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')chk(id)})});
-  f.addEventListener('submit',function(e){e.preventDefault();var first=null;Object.keys(rules).forEach(function(id){if(!chk(id)&&!first)first=id});document.getElementById('f-ok').hidden=!!first;if(first)document.getElementById(first).focus()});
+  f.addEventListener('submit',function(e){e.preventDefault();var first=null;Object.keys(rules).forEach(function(id){if(!chk(id)&&!first)first=id});
+    var ok=document.getElementById('f-ok'),er=document.getElementById('f-err'),btn=f.querySelector('button[type=submit]');ok.hidden=true;er.hidden=true;
+    if(first){document.getElementById(first).focus();return}
+    if(btn.disabled) return;
+    var label=btn.textContent;btn.disabled=true;btn.textContent=x.sending;
+    var needs=[].slice.call(f.querySelectorAll('[id^=need]:checked')).map(function(c){return c.parentNode.querySelector('b').textContent});
+    var fd=new FormData(), v=function(id){return document.getElementById(id).value.trim()}, img=document.getElementById('f-img').files[0];
+    fd.append('_subject','Submit Music: '+v('f-name'));fd.append('_template','table');fd.append('_captcha','false');fd.append('_replyto',v('f-email'));
+    fd.append('Artist',v('f-name'));fd.append('Music link',v('f-link'));fd.append('Email',v('f-email'));fd.append('Needs',needs.join(', ')||'-');fd.append('Newsletter',document.getElementById('f-nl').checked?'Yes':'No');fd.append('Language',lang);
+    if(img) fd.append('attachment',img,img.name);
+    fd.append('_honey','');
+    fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
+      .then(function(){ok.hidden=false;f.reset();document.getElementById('f-img-name').textContent=x.upload;ok.focus&&ok.scrollIntoView({block:'nearest'})})
+      .catch(function(){er.hidden=false})
+      .then(function(){btn.disabled=false;btn.textContent=label});
+  });
   document.getElementById('f-img').addEventListener('change',function(){document.getElementById('f-img-name').textContent=this.files[0]?this.files[0].name:x.upload});
 }
 
