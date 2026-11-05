@@ -331,6 +331,8 @@ img,svg{max-width:100%}
 .hero-deco>.in{position:relative;z-index:1}
 .deco{position:absolute;pointer-events:none;z-index:0}
 .deco-crescent{right:-4%;bottom:-38%;width:min(64vw,880px)}
+.ph-cres .in{padding-bottom:clamp(120px,15vw,210px)!important}
+.ph-cres .deco-crescent{width:min(56vw,680px);right:-3%;bottom:calc(min(15vw,170px) - min(56vw,680px)*0.478)}
 .deco-stars{right:-6%;top:44%;width:min(40vw,560px)}
 .send-fig{display:flex;flex-direction:column;align-items:flex-end;gap:24px;flex:none}
 .send-fig .art{height:clamp(220px,26vw,360px);width:auto}
@@ -518,7 +520,7 @@ var T = {
   meta:['Independent record label','Istanbul'],
   lede:'Internet Wedding is an independent label from Istanbul. We work with artists who don’t fit the industry’s usual moulds, wherever they live and whatever language they sing in.',
   latest:'Latest release',
-  ticker:[['en','Internet Wedding'],['en','Independent record label'],['en','Istanbul'],['en','Out now:'],['tr','Lavlandık, Sevdiğimiz Şeyler']],
+  ticker:[['en','Internet Wedding'],['en','Independent record label'],['en','Istanbul']],
   releases:'Releases', artists:'Artists', roster:'Roster',
   work:'How we work',
   whatWeDo:'What we do',
@@ -743,7 +745,7 @@ function iwPat(o){
    of their row, and thin out at the frame edge instead of being cut off. */
 var IWM={vis:[],io:null,target:0,lastY:0,run:false,raf:0,reduce:false};
 try{IWM.reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;IWM.touch=matchMedia('(hover: none)').matches;if(/[?&]still\b/.test(location.search))IWM.reduce=true}catch(e){}
-var HEROMASK=(/[?&]mask=(all|noise|glitch|both)/.exec(location.search)||[])[1]||'glitch';
+var HEROMASK=(/[?&]mask=(all|noise|glitch|both)/.exec(location.search)||[])[1]||'';
 function heroH1(){
   var w=['Protect','what','matters,','not','from','noise'];
   if(!HEROMASK) return w.join(' ');
@@ -974,8 +976,6 @@ function home(){
   +'<div class="band" aria-hidden="true"><div class="in"><div class="rv">'+iwPat({kind:'sapma',per:1.6,slope:0.5,w:1200,h:232,rows:5,fg:'#FFFFFF',seed:12,cls:'wide'})+'</div></div></div>'
   +'<section class="about" id="about-sec"><div class="in two" style="align-items:flex-start;gap:56px">'
   +'<div style="display:flex;flex-direction:column;gap:24px;max-width:760px"><span class="lbl rv" style="color:var(--lime)">'+x.about+'</span><p class="hd quote-big rv">'+x.aboutBig+'</p><p class="rv" style="margin:0;font-size:18px;line-height:1.55;max-width:54ch;color:var(--mute-d)">'+x.aboutText+'</p></div>'
-  +'<div class="cat rv" style="flex:0 1 400px;width:100%;display:flex;flex-direction:column"><span class="lbl" style="color:var(--lime);padding-bottom:10px">'+x.catalogue+'</span>'
-  +RELEASES.map(function(r){return '<a href="#release-'+r.id+'"><span class="lbl" style="padding-top:3px">'+r.cat+'</span><span>'+nm(r.artist)+', <span lang="'+r.tl+'">'+esc(r.title)+'</span></span></a>'}).join('')+'</div>'
   +'</div></section>'
   +'<section class="send"><div class="in two">'
   +'<div style="display:flex;flex-direction:column;gap:18px"><span class="lbl rv">'+x.sendLbl+'</span><h2 class="hd rv">'+x.sendH+'</h2><p class="rv" style="margin:0;font-size:19px;line-height:1.45;max-width:40ch">'+x.sendText+'</p></div>'
@@ -1012,7 +1012,7 @@ function pager(prevH,prevLbl,prevName,prevLang,nextH,nextLbl,nextName,nextLang){
 }
 
 function pageHead(bg,fg,lbl,title,titleLang,deco){
-  return '<section class="'+(deco?'hero-deco':'')+'" style="background:'+bg+';color:'+fg+';border-bottom:2px solid var(--black)">'+(deco||'')+'<div class="in" style="padding-top:22px;padding-bottom:40px;display:flex;flex-direction:column;gap:28px">'
+  return '<section class="'+(deco?'hero-deco':'')+(deco&&deco.indexOf('deco-crescent')>-1?' ph-cres':'')+'" style="background:'+bg+';color:'+fg+';border-bottom:2px solid var(--black)">'+(deco||'')+'<div class="in" style="padding-top:22px;padding-bottom:40px;display:flex;flex-direction:column;gap:28px">'
    +'<div class="lbl rv" style="display:flex;justify-content:space-between;gap:16px"><a href="#home" style="text-decoration:none">← <span lang="en">Internet Wedding</span></a><span>'+lbl+'</span></div>'
    +'<h1 class="hd rv"'+(titleLang?' lang="'+titleLang+'"':'')+' style="font-size:clamp(56px,11vw,168px);line-height:1">'+title+'</h1></div></section>';
 }
