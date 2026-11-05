@@ -1289,6 +1289,23 @@ function plStart(){
     n.start(0,Math.min(PL.off,buf.duration-0.05)); PL.node=n; PL.t0=ctx.currentTime-PL.off; PL.playing=true; plUI(); plLoop();
   });
 }
+function plMeta(){
+  if(!('mediaSession' in navigator)) return;
+  var tk=PL.q[PL.i], r=RELEASES.filter(function(o){return o.id===tk.rel})[0]||{}, ar=ARTISTS[tk.artist]||{};
+  try{
+    if(PL._mk!==PL.i&&window.MediaMetadata){PL._mk=PL.i;
+      navigator.mediaSession.metadata=new MediaMetadata({title:tk.title,artist:ar.name||'',album:(r.title||'')+' · Internet Wedding',
+        artwork:r.img?[{src:r.img,sizes:'1000x1000',type:'image/jpeg'},{src:r.img,sizes:'512x512',type:'image/jpeg'}]:[{src:'https://internetweddingmusic.com/favicon-192.png',sizes:'192x192',type:'image/png'}]})}
+    navigator.mediaSession.playbackState=PL.playing?'playing':'paused';
+    var d=plDur(); if(d&&isFinite(d)&&navigator.mediaSession.setPositionState) navigator.mediaSession.setPositionState({duration:d,playbackRate:1,position:Math.min(d,Math.max(0,plPos()))});
+  }catch(e){}
+}
+(function(){if(!('mediaSession' in navigator)) return; var h=function(n,f){try{navigator.mediaSession.setActionHandler(n,f)}catch(e){}};
+  h('play',function(){plPlay()}); h('pause',function(){plPause()}); h('stop',function(){plStop()});
+  h('nexttrack',function(){plNext()}); h('previoustrack',function(){plPrev()});
+  h('seekto',function(e){var tk=PL.q[PL.i]; if(PL.el&&tk.src&&e.seekTime!=null){PL.el.currentTime=e.seekTime;PL.off=e.seekTime;plMeta()}});
+  h('seekbackward',null); h('seekforward',null);
+})();
 function plPlay(){PL.want=true;plOpen();plStart();plUI()}
 function plPause(){if(!PL.playing){PL.want=false;plUI();return}PL.off=plPos();PL.playing=false;PL.want=false;plStopNode();plUI()}
 function plStop(){PL.want=false;PL.playing=false;plStopNode();PL.off=0;plUI()}
@@ -1297,7 +1314,7 @@ function plNext(auto){plGo(PL.i+1,auto?true:PL.want)}
 function plPrev(){if(plPos()>3){PL.off=0;if(PL.want)plStart();else plUI()}else plGo(PL.i-1,PL.want)}
 function plOpen(){var p=plEl('iwp');if(!p.classList.contains('on')){p.classList.add('on');plUI()}}
 function plClose(){plStop();plEl('iwp').classList.remove('on');plEl('iwpLaunch').focus()}
-function plUI(){
+function plUI(){plMeta();
   var x=t(), tk=PL.q[PL.i]; if(!tk) return;
   var a=ARTISTS[tk.artist].name;
   plEl('iwpMq').textContent=a+'  —  '+tk.title+'  ·  '+tk.cat+'  ·  ';
