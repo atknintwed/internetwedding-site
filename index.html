@@ -335,8 +335,7 @@ img,svg{max-width:100%}
 .hero-deco>.in{position:relative;z-index:1}
 .deco{position:absolute;pointer-events:none;z-index:0}
 .deco-crescent{right:-4%;bottom:-38%;width:min(64vw,880px)}
-.ph-cres .in{padding-bottom:clamp(120px,15vw,210px)!important}
-.ph-cres .deco-crescent{width:min(56vw,680px);right:-3%;bottom:calc(min(15vw,170px) - min(56vw,680px)*0.478)}
+.ph-tr .deco-crescent{right:-34%}
 .deco-stars{right:-6%;top:44%;width:min(40vw,560px)}
 .send-fig{display:flex;flex-direction:column;align-items:flex-end;gap:24px;flex:none}
 .send-fig .art{height:clamp(220px,26vw,360px);width:auto}
@@ -376,6 +375,7 @@ img,svg{max-width:100%}
   .job-head,.job-parts>div,.job-foot{padding:18px}
   .job-parts>div+div{border-left:0;border-top:2px solid var(--black)}
   .deco-crescent{width:120vw;right:-72%;bottom:-38%}
+  .ph-tr .deco-crescent{display:none}
   .deco-stars{width:84vw;right:-34%;top:58%}
   .send-fig{align-items:flex-start}
   .send-fig .art{height:200px}
@@ -1019,7 +1019,7 @@ function pager(prevH,prevLbl,prevName,prevLang,nextH,nextLbl,nextName,nextLang){
 }
 
 function pageHead(bg,fg,lbl,title,titleLang,deco){
-  return '<section class="'+(deco?'hero-deco':'')+(deco&&deco.indexOf('deco-crescent')>-1?' ph-cres':'')+'" style="background:'+bg+';color:'+fg+';border-bottom:2px solid var(--black)">'+(deco||'')+'<div class="in" style="padding-top:22px;padding-bottom:40px;display:flex;flex-direction:column;gap:28px">'
+  return '<section class="'+(deco?'hero-deco':'')+(deco&&deco.indexOf('deco-crescent')>-1&&lang==='tr'?' ph-tr':'')+'" style="background:'+bg+';color:'+fg+';border-bottom:2px solid var(--black)">'+(deco||'')+'<div class="in" style="padding-top:22px;padding-bottom:40px;display:flex;flex-direction:column;gap:28px">'
    +'<div class="lbl rv" style="display:flex;justify-content:space-between;gap:16px"><a href="#home" style="text-decoration:none">← <span lang="en">Internet Wedding</span></a><span>'+lbl+'</span></div>'
    +'<h1 class="hd rv"'+(titleLang?' lang="'+titleLang+'"':'')+' style="font-size:clamp(56px,11vw,168px);line-height:1">'+title+'</h1></div></section>';
 }
