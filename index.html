@@ -3,18 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Internet Wedding</title>
-<meta name="description" content="Internet Wedding is an independent record label from Istanbul, working with artists who don’t fit the industry’s usual moulds.">
+<title>Internet Wedding · Independent record label, Istanbul</title>
+<meta name="description" content="Internet Wedding is an independent record label from Istanbul, working with artists who don’t fit the industry’s usual moulds: Lavlandık, These Petty Wings, Sihr and Eb.rar.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Internet Wedding">
 <meta property="og:title" content="Internet Wedding · Independent record label, Istanbul">
-<meta property="og:description" content="We work with artists who don’t fit the industry’s usual moulds, wherever they live and whatever language they sing in.">
+<meta property="og:description" content="Internet Wedding is an independent record label from Istanbul, working with artists who don’t fit the industry’s usual moulds: Lavlandık, These Petty Wings, Sihr and Eb.rar.">
 <meta property="og:url" content="https://internetweddingmusic.com/">
 <meta property="og:image" content="https://internetweddingmusic.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Internet Wedding logo on a pink and black pattern">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://internetweddingmusic.com/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Internet Wedding", "url": "https://internetweddingmusic.com/", "logo": "https://internetweddingmusic.com/favicon-192.png", "email": "atakan@internetweddingmusic.com", "address": {"@type": "PostalAddress", "addressLocality": "Istanbul", "addressCountry": "TR"}, "description": "Independent record label from Istanbul."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Internet Wedding", "url": "https://internetweddingmusic.com/"}</script>
 <meta name="theme-color" content="#F763D8">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -1203,7 +1206,29 @@ function reveal(){
   els.forEach(function(e){io.observe(e)});
 }
 
-var cur=(location.hash||'#home').slice(1)||'home';
+var RSLUG={intwed0003:'sevdigimiz-seyler',intwed0002:'lonely-hands-reaching',intwed0001:'all-of-that-wants-your-longing',intwed0000:'kismet-a-side'};
+var ASLUG={lavlandik:'lavlandik',tpw:'these-petty-wings',sihr:'sihr',ebrar:'eb-rar'};
+var PSLUG={catalogue:'releases',live:'live',journal:'journal',about:'about',apply:'submit','work-with-us':'work-with-us'};
+var USEPATH=location.protocol!=='file:'&&/internetweddingmusic\.com$|^localhost$/.test(location.hostname);
+function toPath(h){
+  if(h.indexOf('release-')===0&&RSLUG[h.slice(8)]) return '/releases/'+RSLUG[h.slice(8)]+'/';
+  if(h.indexOf('artist-')===0&&ASLUG[h.slice(7)]) return '/artists/'+ASLUG[h.slice(7)]+'/';
+  if(PSLUG[h]) return '/'+PSLUG[h]+'/';
+  return h==='home'?'/':'/#'+h;
+}
+function fromPath(p){
+  var m=p.replace(/\/+$/,'').split('/').filter(Boolean),k;
+  if(!m.length) return 'home';
+  if(m[0]==='releases'&&m[1]){for(k in RSLUG)if(RSLUG[k]===m[1])return 'release-'+k}
+  if(m[0]==='artists'&&m[1]){for(k in ASLUG)if(ASLUG[k]===m[1])return 'artist-'+k}
+  for(k in PSLUG)if(PSLUG[k]===m[0]&&!m[1])return k;
+  return 'home';
+}
+function readLoc(){var h=(location.hash||'').slice(1), p=USEPATH?fromPath(location.pathname):'home';
+  if(h&&(p==='home'||pageOf(h)!=='home')) return h; return p}
+function linkify(root){if(!USEPATH)return;(root||document).querySelectorAll('a[href^="#"]').forEach(function(a){var h=a.getAttribute('href').slice(1);if(h){a.setAttribute('data-h',h);a.setAttribute('href',toPath(h))}})}
+var cur=readLoc();
+if(USEPATH&&location.hash&&pageOf(cur)!=='home'){try{history.replaceState(null,'',toPath(cur))}catch(e){}}
 function pageOf(h){return /^(release|artist)-/.test(h)||['apply','catalogue','live','journal','about','work-with-us'].indexOf(h)>-1?h:'home'}
 function wipeColor(h){
   if(h.indexOf('release-')===0){var r=RELEASES.filter(function(o){return o.id===h.slice(8)})[0];if(r)return [r.bg,r.fg]}
@@ -1216,13 +1241,13 @@ var wiping=false;
 function go(h){
   closeMenu(true);
   var same=pageOf(h)===pageOf(cur);
-  if(same||IWM.reduce||wiping){cur=h;try{history.pushState(null,'','#'+h)}catch(e){}route(false);return}
+  if(same||IWM.reduce||wiping){cur=h;try{history.pushState(null,'',USEPATH?toPath(h):'#'+h)}catch(e){}route(false);return}
   /* plain cross-fade: the current page fades out, the new one fades in */
   var app=document.getElementById('app'), de=document.documentElement; wiping=true;
   app.style.transition='opacity .2s cubic-bezier(.4,0,.2,1)'; app.style.opacity='0';
   setTimeout(function(){
     de.style.scrollBehavior='auto';
-    cur=h;try{history.pushState(null,'','#'+h)}catch(e){}route(false);
+    cur=h;try{history.pushState(null,'',USEPATH?toPath(h):'#'+h)}catch(e){}route(false);
     app.style.transition='';app.style.opacity='';
     requestAnimationFrame(function(){de.style.scrollBehavior='';wiping=false});
   },200);
@@ -1384,20 +1409,23 @@ function route(keepScroll){
   app.style.animation='none'; app.offsetHeight; app.style.animation='';
   app.innerHTML=html;
   document.title=({apply:t().apply.h,catalogue:t().catTitle,live:t().liveTitle,journal:t().jTitle,about:t().aTitle,'work-with-us':t().jbTitle}[h]?{apply:t().apply.h,catalogue:t().catTitle,live:t().liveTitle,journal:t().jTitle,about:t().aTitle,'work-with-us':t().jbTitle}[h]+' · ':'')+'Internet Wedding';
-  bindApply(); bindCatalogue(); reveal(); mwInit(); iwAnimInit();
+  (function(){var R=h.indexOf('release-')===0&&RELEASES.filter(function(o){return o.id===h.slice(8)})[0],Ak=h.indexOf('artist-')===0&&ARTISTS[h.slice(7)];
+    if(R)document.title=R.title+' · '+ARTISTS[R.artist].name+' · Internet Wedding';else if(Ak)document.title=Ak.name+' · Internet Wedding';else if(pageOf(h)==='home')document.title='Internet Wedding · Independent record label, Istanbul'})();
+  linkify(); bindApply(); bindCatalogue(); reveal(); mwInit(); iwAnimInit();
   if(keepScroll) return;
   if(sectionTarget){var el=document.getElementById(sectionTarget); if(el) el.scrollIntoView()} else window.scrollTo(0,0);
 }
 
 document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){
   if(lang===b.dataset.lang) return; lang=b.dataset.lang; try{localStorage.setItem('iw-lang',lang)}catch(e){}
-  route(true); renderFoot(); plUI();
+  route(true); renderFoot(); linkify(); plUI();
   document.querySelectorAll('.rv').forEach(function(e){var r=e.getBoundingClientRect(); if(r.top<innerHeight&&r.bottom>0) e.classList.add('on')});
 })});
-window.addEventListener('hashchange',function(){var h=(location.hash||'#home').slice(1)||'home';if(h!==cur){cur=h;route(false)}});
-window.addEventListener('popstate',function(){var h=(location.hash||'#home').slice(1)||'home';if(h!==cur){cur=h;route(false)}});
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var h=a.getAttribute('href').slice(1);if(!h)return;e.preventDefault();go(h)});
+window.addEventListener('hashchange',function(){var h=readLoc();if(h!==cur){cur=h;if(USEPATH&&pageOf(h)!=='home'){try{history.replaceState(null,'',toPath(h))}catch(e){}}route(false)}});
+window.addEventListener('popstate',function(){var h=readLoc();if(h!==cur){cur=h;route(false)}});
+document.addEventListener('click',function(e){if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;var a=e.target.closest&&e.target.closest('a[data-h],a[href^="#"]');if(!a)return;var h=a.getAttribute('data-h')||a.getAttribute('href').slice(1);if(!h)return;e.preventDefault();go(h)});
 renderFoot(); route(false);
+window.IWDATA={RELEASES:RELEASES,ARTISTS:ARTISTS,RSLUG:RSLUG,ASLUG:ASLUG};
 })();
 </script>
 </body>

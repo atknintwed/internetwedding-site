@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://internetweddingmusic.com/sitemap.xml
