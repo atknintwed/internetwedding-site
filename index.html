@@ -103,6 +103,9 @@ img,svg{max-width:100%}
 .tile{display:flex;flex-direction:column;gap:12px;text-decoration:none;min-width:0}
 .cover{aspect-ratio:1/1;max-width:100%;border:2px solid var(--black);display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:18px;transition:transform .25s}
 .tile:hover .cover{transform:translateY(-6px)}
+.cover.cimg{padding:0;overflow:hidden;background:var(--black)}
+.cimg img,.sq img,.sw img{width:100%;height:100%;object-fit:cover;display:block}
+.tile-sub{font-size:15px;color:var(--mute);margin-top:2px}
 .cover .t{font-size:24px;line-height:1.05;letter-spacing:-.01em}
 .tile-meta{display:flex;justify-content:space-between;gap:12px;border-top:2px solid var(--black);padding-top:10px}
 .tile-meta b{font-weight:500;font-size:17px}
@@ -647,23 +650,23 @@ var NEWS = [
  {date:'2026-05-05',tag:{en:'Single',tr:'Single'},title:{en:'Awful Things',tr:'Awful Things'},text:{en:'The first single from Lonely Hands Reaching.',tr:'Lonely Hands Reaching’in ilk single’ı.'},link:'#release-intwed0002',bg:'#1A1A1A',fg:'#FFFFFF',seed:9}
 ];
 var RELEASES = [
- {id:'intwed0003',cat:'INTWED0003',title:'Sevdiğimiz Şeyler',tl:'tr',artist:'lavlandik',kind:'album',date:'2026-07-31',bg:'#E9FF8A',fg:'#1A1A1A',
+ {id:'intwed0003',img:'covers/intwed0003.jpg',cat:'INTWED0003',title:'Sevdiğimiz Şeyler',tl:'tr',artist:'lavlandik',kind:'album',date:'2026-07-31',bg:'#E9FF8A',fg:'#1A1A1A',
   text:{en:'Lavlandık’s debut album feels like the last day of summer. Led by the singles Irgat and Kokular, it stays with small things that last: childhood afternoons, wet hair after the sea, a familiar smell, someone you’re still waiting for.',
         tr:'Lavlandık’ın ilk albümü yazın son günü gibi. Irgat ve Kokular single’larıyla açılan albüm, küçük ama kalıcı şeylerde duruyor: çocukluk öğleden sonraları, denizden çıkmış ıslak saçlar, tanıdık bir koku, hâlâ beklenen biri.'},
   tracks:[['Irgat','2:38','single','audio/intwed0003-01.mp3'],['Dalgalarla Sörf','2:22','','audio/intwed0003-02.mp3'],['Ağacın Altında','4:03','','audio/intwed0003-03.mp3'],['Gümüşhane Boi','3:02','','audio/intwed0003-04.mp3'],['Yapboz','2:40','focus','audio/intwed0003-05.mp3'],['Kokular','3:24','single','audio/intwed0003-06.mp3'],['Meyvelerim','3:23','','audio/intwed0003-07.mp3']],tll:'tr',
   credits:[[{en:'Written by',tr:'Söz ve müzik'},'Ömer Kaya, Doğa Ocak, Atakan Türkan, Orhun Barış'],[{en:'Produced by',tr:'Prodüksiyon'},'Lavlandık'],[{en:'Mixed and mastered by',tr:'Miks ve mastering'},'Ömer Kaya'],[{en:'Singles',tr:'Single’lar'},{en:'Irgat, 12 June 2026 · Kokular, 10 July 2026',tr:'Irgat, 12 Haziran 2026 · Kokular, 10 Temmuz 2026'}],[{en:'Genre',tr:'Tür'},'Indie pop, dream pop, bedroom pop'],[{en:'Rights',tr:'Haklar'},'℗ © 2026 Internet Wedding']],
   links:[['Spotify','https://open.spotify.com/artist/7tBRRQRjxSOEQlbmiUmSO6'],['Apple Music','https://music.apple.com/gb/artist/lavland%C4%B1k/6770598290'],['YouTube','https://www.youtube.com/@Lavlandik']]},
- {id:'intwed0002',cat:'INTWED0002',title:'Lonely Hands Reaching',tl:'en',artist:'tpw',kind:'ep',date:'2026-05-19',bg:'#87BCF4',fg:'#1A1A1A',
+ {id:'intwed0002',img:'covers/intwed0002.jpg',cat:'INTWED0002',title:'Lonely Hands Reaching',tl:'en',artist:'tpw',kind:'ep',date:'2026-05-19',bg:'#87BCF4',fg:'#1A1A1A',
   text:{en:'Four songs about what happens in the space between people, and about losing track of yourself in an endless digital world. The production leans on the machine. The songs underneath it are very human.',
         tr:'İnsanlar arasındaki boşlukta olanlar ve sonsuz bir dijital dünyada kendini kaybetmek üzerine dört şarkı. Prodüksiyon makineye yaslanıyor, altındaki şarkılar ise fazlasıyla insani.'},
   tracks:[['Awful Things','4:52','single','audio/intwed0002-01.mp3'],['I Want To Know You’re Awake','3:58','','audio/intwed0002-02.mp3'],['loveu','3:22','','audio/intwed0002-03.mp3'],['God’s Softest Angels','7:54','','audio/intwed0002-04.mp3']],tll:'en',
   credits:[[{en:'Written by',tr:'Söz ve beste'},'Benedict Martin'],[{en:'Produced by',tr:'Prodüksiyon'},'These Petty Wings'],[{en:'Single',tr:'Single'},{en:'Awful Things, 5 May 2026',tr:'Awful Things, 5 Mayıs 2026'}]],links:[]},
- {id:'intwed0001',cat:'INTWED0001',title:'All of That Wants Your Longing',tl:'en',artist:'sihr',kind:'ep',date:'2026-03-06',bg:'#1A1A1A',fg:'#FFFFFF',
+ {id:'intwed0001',img:'covers/intwed0001.jpg',cat:'INTWED0001',title:'All of That Wants Your Longing',tl:'en',artist:'sihr',kind:'ep',date:'2026-03-06',bg:'#1A1A1A',fg:'#FFFFFF',
   text:{en:'Sihr moves into hybrid production here: electronic foundations, guitar textures, rock dynamics and rhythmic vocals. The record swings between confrontation and acceptance, carrying grief and change through funk, soul, folk and quiet jazz harmony.',
         tr:'Sihr bu EP’de hibrit prodüksiyona geçiyor: elektronik temeller, gitar dokuları, rock dinamikleri ve ritmik vokaller. Kayıt yüzleşmeyle kabul arasında gidip geliyor; yası ve değişimi funk, soul, folk ve sakin caz armonileriyle taşıyor.'},
   tracks:[['Boogieman','3:19','','audio/intwed0001-01.mp3'],['All of That Wants Your Longing','2:39','','audio/intwed0001-02.mp3'],['Goldenfish','3:04','','audio/intwed0001-03.mp3'],['The Ocean is Here','1:51','','audio/intwed0001-04.mp3'],['Home, Trees etc.','3:17','','audio/intwed0001-05.mp3']],tll:'en',
   credits:[[{en:'Written and produced by',tr:'Söz, müzik ve prodüksiyon'},'Sihr']],links:[]},
- {id:'intwed0000',cat:'INTWED0000',title:'KISMET (A-Side)',tl:'en',artist:'ebrar',kind:'album',date:'2025-08-15',bg:'#F763D8',fg:'#1A1A1A',
+ {id:'intwed0000',img:'covers/intwed0000.jpg',cat:'INTWED0000',title:'KISMET (A-Side)',tl:'en',artist:'ebrar',kind:'album',date:'2025-08-15',bg:'#F763D8',fg:'#1A1A1A',
   text:{en:'Built on indie pop and alternative R&B, KISMET (A-Side) is about disconnection and the everyday chaos of modern life. Live drums, electric guitar, percussion and synths keep it warm and a little rough rather than polished.',
         tr:'Indie pop ve alternatif R&B üzerine kurulu KISMET (A-Side); kopukluk ve modern hayatın gündelik kaosu üzerine. Canlı davul, elektrik gitar, perküsyon ve synth’ler kaydı pürüzsüz değil, sıcak ve biraz pürüzlü tutuyor.'},
   tracks:[['PARLA','3:24','','audio/intwed0000-01.mp3'],['OLMAZ','3:48','','audio/intwed0000-02.mp3'],['UYANDIM','3:15','','audio/intwed0000-03.mp3'],['İSTEMEDEN KIRDIM','2:36','','audio/intwed0000-04.mp3'],['DERT GELİR (PS2)','2:01','','audio/intwed0000-05.mp3'],['SUNSHINE','4:25','','audio/intwed0000-06.mp3'],['ANNE BENDE UMUT ?','2:55','','audio/intwed0000-07.mp3']],tll:'tr',
@@ -916,7 +919,10 @@ function relPat(r,size){
   return '<div class="pfill">'+iwPat({kind:'sapma',seed:p.seed,per:p.per,slope:p.slope,dir:p.dir,amp:p.amp,w:340,h:lg?250:220,rows:lg?10:7,fg:r.fg,cls:'fill'})+'</div>';
 }
 
+function cimg(r,lazy){return '<img src="'+r.img+'" alt="'+esc(r.title)+'" '+(lazy?'loading="lazy" ':'')+'decoding="async">'}
 function tile(r){
+  if(r.img) return '<a class="tile rv" href="#release-'+r.id+'"><div class="cover cimg">'+cimg(r,1)+'</div>'
+   +'<div class="tile-meta" style="display:block"><b lang="'+r.tl+'">'+esc(r.title)+'</b><div class="tile-sub">'+nm(r.artist)+' · '+esc(kindTxt(r.kind))+'</div><div class="lbl mute" style="margin-top:8px">'+r.cat+(r.date?' · '+esc(fmtDate(r.date)):'')+'</div></div></a>';
   return '<a class="tile rv" href="#release-'+r.id+'"><div class="cover" style="background:'+r.bg+';color:'+r.fg+'">'
    +'<div class="lbl" style="display:flex;justify-content:space-between;gap:8px"><span>'+r.cat+'</span><span>'+esc(kindTxt(r.kind))+'</span></div>'
    +relPat(r,'sm')
@@ -963,7 +969,7 @@ function home(){
   +'<div class="lbl meta rv"><span>'+x.meta[0]+'</span><span>'+x.meta[1]+'</span></div>'
   +'<h1 class="hd rv" lang="en">'+heroH1()+'</h1>'
   +'<div class="two"><p class="lede rv rv-d1">'+x.lede+'</p>'
-  +'<a class="latest rv rv-d2" href="#release-'+latest.id+'"><span class="sq" aria-hidden="true" style="background:'+latest.bg+'"><span class="pfill" style="width:100%">'+(function(p){return iwPat({kind:'sapma',seed:p.seed,per:p.per,slope:p.slope,dir:p.dir,amp:p.amp,w:60,h:60,rows:4,fg:latest.fg,cls:'fill'})})(PATK[latest.cat.slice(-4)]||{seed:3})+'</span></span><span style="display:flex;flex-direction:column;gap:2px"><span class="lbl" style="color:var(--lime)">'+x.latest+'</span><span class="hd" lang="'+latest.tl+'" style="font-size:22px;letter-spacing:0;line-height:1.1">'+esc(latest.title)+'</span><span style="font-size:14px">'+nm(latest.artist)+' · '+kindTxt(latest.kind)+' · '+fmtDate(latest.date)+'</span></span></a></div>'
+  +'<a class="latest rv rv-d2" href="#release-'+latest.id+'"><span class="sq" aria-hidden="true" style="background:'+latest.bg+(latest.img?';padding:0':'')+'">'+(latest.img?cimg(latest):'<span class="pfill" style="width:100%">'+(function(p){return iwPat({kind:'sapma',seed:p.seed,per:p.per,slope:p.slope,dir:p.dir,amp:p.amp,w:60,h:60,rows:4,fg:latest.fg,cls:'fill'})})(PATK[latest.cat.slice(-4)]||{seed:3})+'</span>')+'</span><span style="display:flex;flex-direction:column;gap:2px"><span class="lbl" style="color:var(--lime)">'+x.latest+'</span><span class="hd" lang="'+latest.tl+'" style="font-size:22px;letter-spacing:0;line-height:1.1">'+esc(latest.title)+'</span><span style="font-size:14px">'+nm(latest.artist)+' · '+kindTxt(latest.kind)+' · '+fmtDate(latest.date)+'</span></span></a></div>'
   +'</div></section>'
   +'<div class="ticker" aria-hidden="true"><div class="row hd">'+row.replace(/<span>/,'<span>')+'<span>'+tick+'</span><span>'+tick+'</span><span>'+tick+'</span></div></div>'
   +'<section class="sec" id="releases"><div class="in"><div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><h2 class="hd h2">'+x.releases+'</h2><a class="btn" href="#catalogue">'+x.seeAll+' <span aria-hidden="true">→</span></a></div><div class="grid4">'+RELEASES.slice(0,4).map(tile).join('')+'</div></div></section>'
@@ -998,7 +1004,7 @@ function catalogue(){
    +'<div class="seg"><span class="lbl">'+x.vLbl+'</span><div role="group" aria-label="'+x.vLbl+'">'+b('v','grid',x.vGrid,catView==='grid')+b('v','list',x.vList,catView==='list')+'</div></div></div>';
   if(catView==='grid') h+='<div class="grid4">'+list.map(tile).join('')+'</div>';
   else h+='<div class="clist">'+list.map(function(r){
-    return '<a class="crow rv" href="#release-'+r.id+'"><span class="sw" style="background:'+r.bg+'" aria-hidden="true"><span class="pfill" style="width:100%">'+iwPat({kind:'sapma',seed:(PATK[r.cat.slice(-4)]||{seed:3}).seed,per:1.2,w:60,h:60,rows:4,fg:r.fg,cls:'fill'})+'</span></span>'
+    return '<a class="crow rv" href="#release-'+r.id+'"><span class="sw" style="background:'+r.bg+(r.img?';padding:0':'')+'" aria-hidden="true">'+(r.img?cimg(r,1):'<span class="pfill" style="width:100%">'+iwPat({kind:'sapma',seed:(PATK[r.cat.slice(-4)]||{seed:3}).seed,per:1.2,w:60,h:60,rows:4,fg:r.fg,cls:'fill'})+'</span>')+'</span>'
      +'<span class="lbl c-cat">'+r.cat+'</span><span class="hd ct" lang="'+r.tl+'">'+esc(r.title)+'</span><span class="c-art">'+nm(r.artist)+'</span><span class="lbl c-kind">'+kindTxt(r.kind)+'</span><span class="lbl mute c-date">'+(r.date?fmtDate(r.date):x.tba)+'</span></a>'}).join('')+'</div>';
   return h+'</section>';
 }
@@ -1078,10 +1084,10 @@ function release(r){
   var x=t(), a=ARTISTS[r.artist];
   var h='<div class="in crumb"><a class="lbl" href="#releases">← '+x.allReleases+'</a></div>'
   +'<section class="in split" style="padding-bottom:80px">'
-  +'<div class="rv" style="flex:1 1 520px;max-width:640px"><div class="cover cover-big" style="background:'+r.bg+';color:'+r.fg+'">'
+  +'<div class="rv" style="flex:1 1 520px;max-width:640px">'+(r.img?'<div class="cover cover-big cimg">'+cimg(r)+'</div></div>':'<div class="cover cover-big" style="background:'+r.bg+';color:'+r.fg+'">'
   +'<div class="lbl" style="display:flex;justify-content:space-between;font-size:14px"><span>'+r.cat+'</span><span>'+kindTxt(r.kind)+'</span></div>'
   +relPat(r,'lg')
-  +'<span class="hd t" lang="'+r.tl+'">'+esc(r.title)+'</span></div></div>'
+  +'<span class="hd t" lang="'+r.tl+'">'+esc(r.title)+'</span></div></div>')
   +'<div style="flex:1 1 460px;display:flex;flex-direction:column;gap:32px">'
   +'<div class="rv" style="display:flex;flex-direction:column;gap:12px"><span class="lbl">'+kindTxt(r.kind)+' · '+r.cat+(r.date?' · '+fmtDate(r.date):'')+'</span>'
   +'<h1 class="hd" lang="'+r.tl+'" style="font-size:clamp(44px,5.6vw,88px);line-height:1">'+esc(r.title)+'</h1>'
