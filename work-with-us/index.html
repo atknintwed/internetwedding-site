@@ -31,7 +31,7 @@
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-anchor:none}
+html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-anchor:none}
 body{overflow-anchor:none}
 body{margin:0;background:var(--paper);color:var(--black);font-family:"IW Diatype","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.5}
 a{color:inherit}
@@ -364,7 +364,6 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
 
 @media (max-width:900px){
   .in{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-  .top{position:static}
   .top .in{min-height:0}
   .logo svg{height:30px}
   #cta{display:none}
