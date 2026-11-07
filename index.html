@@ -228,7 +228,7 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
 .menu-btn{display:none;font-family:"IW Rounded",Arial,sans-serif;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-size:13px;background:var(--black);color:var(--white);border:2px solid var(--black);min-height:44px;padding:0 16px;cursor:pointer}
 .mmenu{position:fixed;inset:0;z-index:60;background:var(--pink);color:var(--black);display:flex;flex-direction:column;overflow:auto;visibility:hidden;-webkit-clip-path:circle(0px at var(--mx,calc(100% - 40px)) var(--my,32px));clip-path:circle(0px at var(--mx,calc(100% - 40px)) var(--my,32px));transition:-webkit-clip-path .55s cubic-bezier(.65,0,.3,1),clip-path .55s cubic-bezier(.65,0,.3,1),visibility 0s linear .55s}
 .mmenu.open{visibility:visible;-webkit-clip-path:circle(var(--mr,150vmax) at var(--mx,calc(100% - 40px)) var(--my,32px));clip-path:circle(var(--mr,150vmax) at var(--mx,calc(100% - 40px)) var(--my,32px));transition:-webkit-clip-path .7s cubic-bezier(.65,0,.3,1),clip-path .7s cubic-bezier(.65,0,.3,1),visibility 0s}
-.mmenu .mhead{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:2px solid var(--black)}
+.mmenu .mhead{display:flex;justify-content:space-between;align-items:center;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-bottom:2px solid var(--black)}
 .mmenu .mlinks{display:flex;flex-direction:column;padding:8px 16px 0;flex:1}
 .mmenu .mlinks a{font-family:"IW Rounded",Arial,sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(40px,12vw,76px);line-height:1.1;text-decoration:none;border-bottom:2px solid var(--black);padding:10px 0 6px}
 .mmenu .mlinks a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:4px;text-underline-offset:8px}
@@ -369,7 +369,9 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
   .top .in{min-height:0}
   .top{transition:transform .32s cubic-bezier(.4,0,.2,1)}
   .top.hide{transform:translateY(calc(-100% - 2px))}
-  .logo svg{height:30px}
+  .logo svg{height:30px;width:auto}
+  .top .logo,.mmenu .logo{flex:none}
+  .top .in{column-gap:12px}
   #cta{display:none}
   .nav{display:none}
   .menu-btn{display:inline-flex;align-items:center}
@@ -409,6 +411,8 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
   .kv>:first-child{font-size:13px}
   .show{grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}
 }
+@media (max-width:400px){.logo svg{height:27px}}
+@media (max-width:360px){.logo svg{height:21px}.top .in{column-gap:8px}.tools{gap:6px}.lang button{min-width:34px;padding:0 6px}.menu-btn{padding-left:10px;padding-right:10px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   #app{animation:none}
