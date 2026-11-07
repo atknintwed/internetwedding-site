@@ -367,6 +367,8 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
 @media (max-width:900px){
   .in{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
   .top .in{min-height:0}
+  .top{transition:transform .32s cubic-bezier(.4,0,.2,1)}
+  .top.hide{transform:translateY(calc(-100% - 2px))}
   .logo svg{height:30px}
   #cta{display:none}
   .nav{display:none}
@@ -1429,6 +1431,14 @@ window.addEventListener('hashchange',function(){var h=readLoc();if(h!==cur){cur=
 window.addEventListener('popstate',function(){var h=readLoc();if(h!==cur){cur=h;route(false)}});
 document.addEventListener('click',function(e){if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;var a=e.target.closest&&e.target.closest('a[data-h],a[href^="#"]');if(!a)return;var h=a.getAttribute('data-h')||a.getAttribute('href').slice(1);if(!h)return;e.preventDefault();go(h)});
 renderFoot(); route(false);
+(function(){var top=document.querySelector('.top'),ly=window.scrollY||0,acc=0,tk=false,mq=window.matchMedia&&matchMedia('(max-width:900px)');
+  function upd(){tk=false;var y=window.scrollY||0,d=y-ly;ly=y;
+    if(!mq||!mq.matches||menuOpen||y<120){top.classList.remove('hide');acc=0;return}
+    acc=(d>0)===(acc>0)?acc+d:d;
+    if(acc>24)top.classList.add('hide');else if(acc<-12)top.classList.remove('hide')}
+  window.addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(upd)}},{passive:true});
+  top.addEventListener('focusin',function(){top.classList.remove('hide')});
+})();
 window.IWDATA={RELEASES:RELEASES,ARTISTS:ARTISTS,RSLUG:RSLUG,ASLUG:ASLUG};
 })();
 </script>
