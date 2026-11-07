@@ -93,10 +93,11 @@ img,svg{max-width:100%}
 .sq{width:72px;height:72px;flex:none;background-color:var(--lime);display:flex;padding:7px;box-sizing:border-box}
 
 .ticker{background:var(--black);color:var(--white);overflow:hidden;white-space:nowrap}
-.ticker .row{display:flex;width:max-content;font-size:22px;letter-spacing:.02em;padding:14px 0;animation:marq 40s linear infinite}
+.ticker .row{display:flex;width:max-content;font-size:22px;letter-spacing:.02em;padding:14px 0;-webkit-animation:marq 40s linear infinite;animation:marq 40s linear infinite;will-change:transform}
 .ticker .row>span{padding-right:0}
 .ticker .row>span>span{padding-right:14px}
-@keyframes marq{to{transform:translateX(-50%)}}
+@-webkit-keyframes marq{from{-webkit-transform:translate3d(0,0,0)}to{-webkit-transform:translate3d(-50%,0,0)}}
+@keyframes marq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
 .sec{border-bottom:2px solid var(--black)}
 .sec .in{padding-top:72px;padding-bottom:80px;display:flex;flex-direction:column;gap:32px}
@@ -411,7 +412,7 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
   html{scroll-behavior:auto}
   #app{animation:none}
   .js .rv{opacity:1;transform:none;transition:none}
-  .ticker .row{animation:none}
+  .ticker .row{-webkit-animation-duration:120s;animation-duration:120s}
   .cover,.rname{transition:none}
   .mmenu,.mmenu.open{transition:none}
   .iwp-mq span{animation:none;padding-left:0}
