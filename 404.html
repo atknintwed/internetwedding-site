@@ -226,8 +226,8 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
 
 /* mobile menu */
 .menu-btn{display:none;font-family:"IW Rounded",Arial,sans-serif;font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-size:13px;background:var(--black);color:var(--white);border:2px solid var(--black);min-height:44px;padding:0 16px;cursor:pointer}
-.mmenu{position:fixed;inset:0;z-index:60;background:var(--pink);color:var(--black);display:flex;flex-direction:column;transform:translateY(-100%);visibility:hidden;transition:transform .45s cubic-bezier(.7,0,.2,1),visibility 0s linear .45s;overflow:auto}
-.mmenu.open{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.7,0,.2,1),visibility 0s}
+.mmenu{position:fixed;inset:0;z-index:60;background:var(--pink);color:var(--black);display:flex;flex-direction:column;overflow:auto;visibility:hidden;-webkit-clip-path:circle(0px at var(--mx,calc(100% - 40px)) var(--my,32px));clip-path:circle(0px at var(--mx,calc(100% - 40px)) var(--my,32px));transition:-webkit-clip-path .55s cubic-bezier(.65,0,.3,1),clip-path .55s cubic-bezier(.65,0,.3,1),visibility 0s linear .55s}
+.mmenu.open{visibility:visible;-webkit-clip-path:circle(var(--mr,150vmax) at var(--mx,calc(100% - 40px)) var(--my,32px));clip-path:circle(var(--mr,150vmax) at var(--mx,calc(100% - 40px)) var(--my,32px));transition:-webkit-clip-path .7s cubic-bezier(.65,0,.3,1),clip-path .7s cubic-bezier(.65,0,.3,1),visibility 0s}
 .mmenu .mhead{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:2px solid var(--black)}
 .mmenu .mlinks{display:flex;flex-direction:column;padding:8px 16px 0;flex:1}
 .mmenu .mlinks a{font-family:"IW Rounded",Arial,sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(40px,12vw,76px);line-height:1.1;text-decoration:none;border-bottom:2px solid var(--black);padding:10px 0 6px}
@@ -414,7 +414,9 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
   .js .rv{opacity:1;transform:none;transition:none}
   .ticker .row{-webkit-animation-duration:120s;animation-duration:120s}
   .cover,.rname{transition:none}
-  .mmenu,.mmenu.open{transition:none}
+  .mmenu,.mmenu.open{-webkit-clip-path:none;clip-path:none}
+  .mmenu{opacity:0;transition:opacity .3s ease,visibility 0s linear .3s}
+  .mmenu.open{opacity:1;transition:opacity .3s ease,visibility 0s}
   .iwp-mq span{animation:none;padding-left:0}
 }
 </style>
@@ -1254,7 +1256,9 @@ function go(h){
   },200);
 }
 var menuOpen=false, menuLast=null;
-function openMenu(){var m=document.getElementById('mmenu');menuLast=document.activeElement;m.classList.add('open');menuOpen=true;document.getElementById('menuBtn').setAttribute('aria-expanded','true');document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('menuClose').focus()},60)}
+function menuOrigin(){var m=document.getElementById('mmenu'),b=document.getElementById(menuOpen?'menuClose':'menuBtn').getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2,W=innerWidth,H=innerHeight;
+  m.style.setProperty('--mx',x+'px');m.style.setProperty('--my',y+'px');m.style.setProperty('--mr',Math.ceil(Math.hypot(Math.max(x,W-x),Math.max(y,H-y)))+'px')}
+function openMenu(){var m=document.getElementById('mmenu');menuOrigin();menuLast=document.activeElement;m.classList.add('open');menuOpen=true;document.getElementById('menuBtn').setAttribute('aria-expanded','true');document.body.style.overflow='hidden';setTimeout(function(){document.getElementById('menuClose').focus()},60)}
 function closeMenu(silent){if(!menuOpen)return;var m=document.getElementById('mmenu');m.classList.remove('open');menuOpen=false;document.getElementById('menuBtn').setAttribute('aria-expanded','false');document.body.style.overflow='';if(!silent&&menuLast)menuLast.focus()}
 
 /* ---------------- IW player ----------------
