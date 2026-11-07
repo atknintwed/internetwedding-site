@@ -1349,12 +1349,13 @@ function plPrev(){if(plPos()>3){PL.off=0;if(PL.want)plStart();else plUI()}else p
 function plOrigin(){var p=plEl('iwp'),l=plEl('iwpLaunch').getBoundingClientRect(),r=p.getBoundingClientRect();
   var x=l.left+l.width/2-r.left,y=l.top+l.height/2-r.top;
   p.style.setProperty('--px',x+'px');p.style.setProperty('--py',y+'px');p.style.setProperty('--pr',Math.ceil(Math.hypot(Math.max(x,r.width-x),Math.max(y,r.height-y)))+4+'px')}
-function plRefit(){var p=plEl('iwp');if(!p.classList.contains('on'))return;p.style.transition='none';plOrigin();p.offsetHeight;p.style.transition=''}
+function plRefit(){var p=plEl('iwp');if(!p.classList.contains('on')||PL.anim)return;var r=p.getBoundingClientRect(),k=[r.left,r.top,r.width,r.height].map(Math.round).join();if(k===PL.rk)return;PL.rk=k;p.style.transition='none';plOrigin();p.offsetHeight;p.style.transition=''}
 if(window.ResizeObserver){new ResizeObserver(function(){plRefit()}).observe(plEl('iwp'))}
 window.addEventListener('resize',plRefit);
+setTimeout(plOrigin,0);
 document.addEventListener('pointerup',function(){setTimeout(plRefit,0)});
-function plOpen(){var p=plEl('iwp');if(!p.classList.contains('on')){plOrigin();p.classList.add('on');plUI()}}
-function plClose(){plStop();plOrigin();plEl('iwp').classList.remove('on');PL.focus=false;plEl('iwpLaunch').focus()}
+function plOpen(){var p=plEl('iwp');if(!p.classList.contains('on')){plUI();plOrigin();PL.anim=true;PL.rk='';p.offsetHeight;p.classList.add('on');clearTimeout(PL.at);PL.at=setTimeout(function(){PL.anim=false;plRefit()},680)}}
+function plClose(){plStop();clearTimeout(PL.at);PL.anim=false;plOrigin();plEl('iwp').classList.remove('on');PL.focus=false;plEl('iwpLaunch').focus()}
 /* keyboard: space toggles when the player was the last thing clicked; media keys always */
 document.addEventListener('pointerdown',function(e){PL.focus=!!(e.target.closest&&e.target.closest('#iwp'))},true);
 document.addEventListener('keydown',function(e){
