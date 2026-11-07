@@ -1349,6 +1349,10 @@ function plPrev(){if(plPos()>3){PL.off=0;if(PL.want)plStart();else plUI()}else p
 function plOrigin(){var p=plEl('iwp'),l=plEl('iwpLaunch').getBoundingClientRect(),r=p.getBoundingClientRect();
   var x=l.left+l.width/2-r.left,y=l.top+l.height/2-r.top;
   p.style.setProperty('--px',x+'px');p.style.setProperty('--py',y+'px');p.style.setProperty('--pr',Math.ceil(Math.hypot(Math.max(x,r.width-x),Math.max(y,r.height-y)))+4+'px')}
+function plRefit(){var p=plEl('iwp');if(!p.classList.contains('on'))return;p.style.transition='none';plOrigin();p.offsetHeight;p.style.transition=''}
+if(window.ResizeObserver){new ResizeObserver(function(){plRefit()}).observe(plEl('iwp'))}
+window.addEventListener('resize',plRefit);
+document.addEventListener('pointerup',function(){setTimeout(plRefit,0)});
 function plOpen(){var p=plEl('iwp');if(!p.classList.contains('on')){plOrigin();p.classList.add('on');plUI()}}
 function plClose(){plStop();plOrigin();plEl('iwp').classList.remove('on');PL.focus=false;plEl('iwpLaunch').focus()}
 /* keyboard: space toggles when the player was the last thing clicked; media keys always */
