@@ -125,14 +125,7 @@ img,svg{max-width:100%}
 .fmedia .t{font-size:clamp(30px,4.4vw,64px);line-height:1;max-width:14ch;position:relative}
 .roles{display:flex;flex-wrap:wrap;gap:8px}
 .roles .chip{margin:0;font-size:12px;padding:5px 9px}
-.ktype{border:2px solid var(--black);display:flex;flex-wrap:wrap}
-.ktype label{flex:1 1 220px;display:flex;gap:12px;align-items:center;padding:14px 16px;cursor:pointer;font-weight:500}
-.ktype label+label{border-left:2px solid var(--black)}
-.ktype input{width:20px;height:20px;accent-color:var(--black);margin:0;flex:none}
-.ktype label:has(input:checked){background:var(--black);color:var(--white)}
-.ktype label:has(input:checked) input{accent-color:var(--pink)}
-@media (max-width:560px){.ktype label+label{border-left:0;border-top:2px solid var(--black)}}
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:24px}
+@media (max-width:560px){.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:24px}
 .vbox{aspect-ratio:16/9;border:2px solid var(--black);background:var(--black)}
 .vbox iframe{width:100%;height:100%;border:0;display:block}
 textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;padding-top:12px;padding-bottom:12px}
@@ -568,16 +561,7 @@ var T = {
     svc:[['Original score',['Composition for picture','Themes and cues','Recording and production']],['Sound design and foley',['Designed sound and effects','Foley','Atmospheres']],['Mix',['Dialogue, music and effects mix','Film, series and ad formats']],['Delivery',['Stems and M&E','Loudness specs for broadcast and streaming']]],
     work:'Selected work', all:'All projects', role:'Our role', watch:'Watch', more:'More projects', links:'Links',
     prev:'Previous project', next:'Next project',
-    ctaH:'Got a picture that needs sound?', ctaBtn:'Start a project', homeLbl:'Film, series and advertising'},
-  brief:{lbl:'Sound for Picture',h:'Start a project',intro:'Tell us about the film, series or ad and what it needs. We reply by email.',
-    kind:'What are you sending?', kMusic:'Music', kFilm:'A film, series or ad',
-    you:'About the project', youText:'Enough for us to understand the picture and reach you.',
-    name:'Your name or production company', link:'Link to the project', linkHint:'A cut, trailer, script or reference. Private links are fine.',
-    msg:'Tell us more', msgHint:'Format, length, schedule and anything else we should know.',
-    needs:'What does it need?', needsText:'Not sure? Leave it blank. We can work it out together.',
-    n:[['Original score','Music written for the picture.'],['Sound design and foley','Designed sound, effects, foley and atmospheres.'],['Mix and delivery','The final mix and the files your platform needs.']],
-    submit:'Send project', eName:'Add your name or your company’s name.',
-    ok:'Thanks, your project is in. We’ll write back by email.'},
+    ctaH:'Got a picture that needs sound?', ctaBtn:'Write to us', homeLbl:'Film, series and advertising'},
   meta:['Independent record label','Istanbul'],
   lede:'Internet Wedding is an independent label from Istanbul. We work with artists who don’t fit the industry’s usual moulds, wherever they live and whatever language they sing in. We also make sound and music for film, series and advertising.',
   latest:'Latest release',
@@ -643,16 +627,7 @@ var T = {
     svc:[['Özgün müzik',['Görüntüye beste','Tema ve cue’lar','Kayıt ve prodüksiyon']],['Ses tasarımı ve foley',['Ses tasarımı ve efektler','Foley','Atmosferler']],['Miks',['Diyalog, müzik ve efekt miksi','Film, dizi ve reklam formatları']],['Teslim',['Stem’ler ve M&E','Yayın ve platformlar için loudness standartları']]],
     work:'Seçili işler', all:'Tüm işler', role:'Rolümüz', watch:'İzle', more:'Diğer işler', links:'Linkler',
     prev:'Önceki iş', next:'Sonraki iş',
-    ctaH:'Sese ihtiyacı olan bir görüntün mü var?', ctaBtn:'Projeni anlat', homeLbl:'Film, dizi ve reklam'},
-  brief:{lbl:'Sound for Picture',h:'Projeni anlat',intro:'Film, dizi ya da reklamını ve neye ihtiyacı olduğunu anlat. Dönüşü e-postayla yapıyoruz.',
-    kind:'Ne gönderiyorsun?', kMusic:'Müzik', kFilm:'Film, dizi ya da reklam',
-    you:'Proje hakkında', youText:'Görüntüyü anlamamıza ve sana ulaşmamıza yetecek kadar bilgi.',
-    name:'Adın ya da yapım şirketi', link:'Proje linki', linkHint:'Kurgu, fragman, senaryo ya da referans. Özel link olabilir.',
-    msg:'Biraz daha anlat', msgHint:'Format, süre, takvim ve bilmemiz gereken her şey.',
-    needs:'Neye ihtiyacı var?', needsText:'Emin değilsen boş bırak. Birlikte karar verebiliriz.',
-    n:[['Özgün müzik','Görüntü için bestelenen müzik.'],['Ses tasarımı ve foley','Ses tasarımı, efektler, foley ve atmosferler.'],['Miks ve teslim','Final miks ve platformun istediği dosyalar.']],
-    submit:'Projeyi gönder', eName:'Adını ya da şirketinin adını yaz.',
-    ok:'Teşekkürler, projen bize ulaştı. E-postayla dönüş yapacağız.'},
+    ctaH:'Sese ihtiyacı olan bir görüntün mü var?', ctaBtn:'Bize yaz', homeLbl:'Film, dizi ve reklam'},
   meta:['Bağımsız plak şirketi','İstanbul'],
   lede:'Internet Wedding, İstanbul’dan bağımsız bir plak şirketi. Nerede yaşadıkları ve hangi dilde söyledikleri fark etmeksizin, sektörün alışılmış kalıplarına uymayan sanatçılarla çalışıyoruz. Film, dizi ve reklam için ses ve müzik de yapıyoruz.',
   latest:'Son yayın',
@@ -1032,14 +1007,14 @@ function renderNav(route){
   document.getElementById('nav').innerHTML=
    '<a href="#catalogue"'+(cur==='catalogue'||cur==='release'?' aria-current="page"':'')+'>'+n.releases+'</a>'+
    '<a href="#artists"'+(cur==='artists'||cur==='artist'?' aria-current="page"':'')+'>'+n.artists+'</a>'+
-   '<a href="#sfp" lang="en"'+(cur==='sfp'||cur==='film'||cur==='brief'?' aria-current="page"':'')+'>Sound for Picture</a>'+
+   '<a href="#sfp" lang="en"'+(cur==='sfp'||cur==='film'?' aria-current="page"':'')+'>Sound for Picture</a>'+
    '<a href="#live"'+(cur==='live'?' aria-current="page"':'')+'>'+t().nLive+'</a><a href="#journal"'+(cur==='journal'?' aria-current="page"':'')+'>'+t().nJournal+'</a><a href="#about"'+(cur==='about'?' aria-current="page"':'')+'>'+n.about+'</a>';
   document.getElementById('cta').textContent=t().cta;
   document.getElementById('mnav').innerHTML=
    '<a href="#home"'+(cur==='home'||cur===''?' aria-current="page"':'')+' lang="en">Internet Wedding</a>'+
    '<a href="#catalogue"'+(cur==='catalogue'||cur==='release'?' aria-current="page"':'')+'>'+n.releases+'</a>'+
    '<a href="#artists"'+(cur==='artist'?' aria-current="page"':'')+'>'+n.artists+'</a>'+
-   '<a href="#sfp" lang="en"'+(cur==='sfp'||cur==='film'||cur==='brief'?' aria-current="page"':'')+'>Sound for Picture</a>'+
+   '<a href="#sfp" lang="en"'+(cur==='sfp'||cur==='film'?' aria-current="page"':'')+'>Sound for Picture</a>'+
    '<a href="#live"'+(cur==='live'?' aria-current="page"':'')+'>'+t().nLive+'</a><a href="#journal"'+(cur==='journal'?' aria-current="page"':'')+'>'+t().nJournal+'</a><a href="#about"'+(cur==='about'?' aria-current="page"':'')+'>'+n.about+'</a><a href="#work-with-us"'+(cur==='work-with-us'?' aria-current="page"':'')+'>'+t().jNav+'</a>';
   document.getElementById('mcta').innerHTML=esc(t().cta)+' <span aria-hidden="true">→︎</span>';
   document.getElementById('menuBtn').textContent=t().menu;
@@ -1212,7 +1187,7 @@ function sfpCta(){
   var s=t().sfp;
   return '<section style="background:var(--black);color:var(--white)"><div class="in two" style="padding-top:56px;padding-bottom:56px;align-items:center">'
    +'<p class="hd rv" style="font-size:clamp(28px,3.6vw,52px);line-height:1.1;margin:0;max-width:20ch">'+s.ctaH+'</p>'
-   +'<a class="btn rv" href="#brief" style="min-height:64px;padding:0 28px;font-size:17px;flex:none">'+s.ctaBtn+' →︎</a></div></section>';
+   +'<a class="btn rv" href="mailto:'+EMAIL+'?subject='+encodeURIComponent('Sound for Picture')+'" style="min-height:64px;padding:0 28px;font-size:17px;flex:none">'+s.ctaBtn+' →︎</a></div></section>';
 }
 function film(f){
   var x=t(), s=x.sfp, i=FILMS.indexOf(f), pr=FILMS[(i-1+FILMS.length)%FILMS.length], nx=FILMS[(i+1)%FILMS.length];
@@ -1294,27 +1269,24 @@ function artist(k){
   return h;
 }
 
-function apply(kind){
-  var film=kind==='film', base=t().apply, x=film?Object.assign({},base,t().brief):base;
-  return '<section style="background:'+(film?'var(--black);color:var(--white)':'var(--lime)')+';border-bottom:2px solid var(--black)"><div class="in" style="padding-top:22px;padding-bottom:48px;display:flex;flex-direction:column;gap:32px">'
+function apply(){
+  var x=t().apply;
+  return '<section style="background:var(--lime);border-bottom:2px solid var(--black)"><div class="in" style="padding-top:22px;padding-bottom:48px;display:flex;flex-direction:column;gap:32px">'
   +'<div class="lbl rv" style="display:flex;justify-content:space-between;gap:16px"><a href="#home" style="text-decoration:none">←︎ <span lang="en">Internet Wedding</span></a><span>'+x.lbl+'</span></div>'
   +'<h1 class="hd rv" style="font-size:clamp(52px,9vw,136px);line-height:1">'+x.h+'</h1>'
-  +'<div class="two rv" style="align-items:flex-end"><p class="lede" style="max-width:40ch">'+x.intro+'</p><div class="apply-stamp">'+art('iwline',{label:'Internet Wedding',ink:film?'#FFFFFF':'#1A1A1A'})+'</div></div></div></section>'
-  +'<form class="in" id="af" novalidate style="padding-top:8px;padding-bottom:72px" data-kind="'+(film?'film':'music')+'">'
-  +'<div class="block rv"><div><h2 class="bh" id="kind-h">'+x.kind+'</h2></div><div class="ktype" role="radiogroup" aria-labelledby="kind-h">'
-  +'<label><input type="radio" name="kind" value="music"'+(film?'':' checked')+'><span>'+x.kMusic+'</span></label>'
-  +'<label><input type="radio" name="kind" value="film"'+(film?' checked':'')+'><span>'+x.kFilm+'</span></label></div></div>'
+  +'<div class="two rv" style="align-items:flex-end"><p class="lede" style="max-width:40ch">'+x.intro+'</p><div class="apply-stamp">'+art('iwline',{label:'Internet Wedding'})+'</div></div></div></section>'
+  +'<form class="in" id="af" novalidate style="padding-top:8px;padding-bottom:72px">'
   +'<div class="block rv"><div><h2 class="bh">'+x.you+'</h2><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.youText+'</p></div><div style="display:flex;flex-direction:column;gap:18px;min-width:0">'
   +fld('f-name','text',x.name,'',x.req,'organization')
-  +fld('f-link','url',x.link,x.linkHint,film?x.opt:x.req,'url')
+  +fld('f-link','url',x.link,x.linkHint,x.req,'url')
   +fld('f-email','email',x.email,'',x.req,'email')
   +'<div class="fld"><label for="f-msg">'+x.msg+'<span class="req">'+x.opt+'</span></label><span class="mute" style="font-size:14px" id="f-msg-h">'+x.msgHint+'</span><textarea class="tx" id="f-msg" rows="6" maxlength="3000" aria-describedby="f-msg-h"></textarea></div>'
   +'</div></div>'
   +'<div class="block rv"><div><h2 class="bh">'+x.needs+'</h2><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.needsText+'</p></div><div style="display:flex;flex-direction:column;gap:14px;min-width:0">'
   +x.n.map(function(n,i){return '<label class="ck" for="need'+i+'"><input type="checkbox" id="need'+i+'"><span><b style="font-weight:500">'+n[0]+'</b><br><span class="mute" style="font-size:14px">'+n[1]+'</span></span></label>'}).join('')
   +'</div></div>'
-  +(film?'':'<div class="block rv"><div><h2 class="bh">'+x.img+'</h2><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.imgText+'</p></div>'
-  +'<label class="drop" for="f-img"><span class="plus hd" aria-hidden="true">+</span><span style="display:flex;flex-direction:column"><span style="font-weight:500" id="f-img-name">'+x.upload+'</span><span style="font-size:14px">'+x.uploadHint+'</span></span><input id="f-img" type="file" accept="image/png,image/jpeg"></label></div>')
+  +'<div class="block rv"><div><h2 class="bh">'+x.img+'</h2><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.imgText+'</p></div>'
+  +'<label class="drop" for="f-img"><span class="plus hd" aria-hidden="true">+</span><span style="display:flex;flex-direction:column"><span style="font-weight:500" id="f-img-name">'+x.upload+'</span><span style="font-size:14px">'+x.uploadHint+'</span></span><input id="f-img" type="file" accept="image/png,image/jpeg"></label></div>'
   +'<div class="block rv"><div><h2 class="bh">'+x.opt+'</h2></div><div><label class="ck" for="f-nl"><input type="checkbox" id="f-nl"><span>'+x.nl+'</span></label></div></div>'
   +'<div class="block rv"><div><h2 class="bh">'+x.send+'</h2><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.sendText+'</p></div><div style="display:flex;flex-direction:column;gap:14px;min-width:0">'
   +'<div style="display:flex;gap:12px;flex-wrap:wrap"><button type="submit" class="btn dark">'+x.submit+'</button><a class="btn" href="#home">'+x.cancel+'</a></div>'
@@ -1324,13 +1296,8 @@ function apply(kind){
 
 function bindApply(){
   var f=document.getElementById('af'); if(!f) return;
-  var fi=document.getElementById('f-img'), film=f.getAttribute('data-kind')==='film', x=film?Object.assign({},t().apply,t().brief):t().apply;
-  f.querySelectorAll('input[name=kind]').forEach(function(r){r.addEventListener('change',function(){
-    var keep={};['f-name','f-link','f-email','f-msg'].forEach(function(id){keep[id]=document.getElementById(id).value});var nl=document.getElementById('f-nl').checked;
-    cur=r.value==='film'?'brief':'apply';try{history.pushState(null,'',USEPATH?toPath(cur):'#'+cur)}catch(e){}route(true);
-    Object.keys(keep).forEach(function(id){document.getElementById(id).value=keep[id]});document.getElementById('f-nl').checked=nl;
-    var n=document.querySelector('#af input[name=kind][value="'+r.value+'"]');if(n)n.focus()})});
-  var rules={'f-name':function(v){return v.trim()?'':x.eName},'f-link':function(v){return (film&&!v.trim())||/^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/.test(v)?'':x.eLink},'f-email':function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?'':x.eEmail}};
+  var x=t().apply;
+  var rules={'f-name':function(v){return v.trim()?'':x.eName},'f-link':function(v){return /^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/.test(v)?'':x.eLink},'f-email':function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?'':x.eEmail}};
   function chk(id){var el=document.getElementById(id),m=rules[id](el.value);document.getElementById(id+'-e').textContent=m;el.setAttribute('aria-invalid',m?'true':'false');return !m}
   Object.keys(rules).forEach(function(id){document.getElementById(id).addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')chk(id)})});
   f.addEventListener('submit',function(e){e.preventDefault();var first=null;Object.keys(rules).forEach(function(id){if(!chk(id)&&!first)first=id});
@@ -1339,17 +1306,17 @@ function bindApply(){
     if(btn.disabled) return;
     var label=btn.textContent;btn.disabled=true;btn.textContent=x.sending;
     var needs=[].slice.call(f.querySelectorAll('[id^=need]:checked')).map(function(c){return c.parentNode.querySelector('b').textContent});
-    var fd=new FormData(), v=function(id){return document.getElementById(id).value.trim()}, img=fi&&fi.files[0];
-    fd.append('_subject',(film?'Sound for Picture: ':'Submit Music: ')+v('f-name'));fd.append('Type',film?'Sound for Picture project':'Music submission');fd.append('_template','table');fd.append('_captcha','false');fd.append('_replyto',v('f-email'));
-    fd.append(film?'Name':'Artist',v('f-name'));fd.append(film?'Project link':'Music link',v('f-link')||'-');fd.append('Email',v('f-email'));fd.append('Message',v('f-msg')||'-');fd.append('Needs',needs.join(', ')||'-');fd.append('Newsletter',document.getElementById('f-nl').checked?'Yes':'No');fd.append('Language',lang);
+    var fd=new FormData(), v=function(id){return document.getElementById(id).value.trim()}, img=document.getElementById('f-img').files[0];
+    fd.append('_subject','Submit Music: '+v('f-name'));fd.append('_template','table');fd.append('_captcha','false');fd.append('_replyto',v('f-email'));
+    fd.append('Artist',v('f-name'));fd.append('Music link',v('f-link'));fd.append('Email',v('f-email'));fd.append('Message',v('f-msg')||'-');fd.append('Needs',needs.join(', ')||'-');fd.append('Newsletter',document.getElementById('f-nl').checked?'Yes':'No');fd.append('Language',lang);
     if(img) fd.append('attachment',img,img.name);
     fd.append('_honey','');
     fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
-      .then(function(){ok.hidden=false;f.reset();f.querySelector('input[name=kind][value="'+(film?'film':'music')+'"]').checked=true;if(fi)document.getElementById('f-img-name').textContent=x.upload;ok.focus&&ok.scrollIntoView({block:'nearest'})})
+      .then(function(){ok.hidden=false;f.reset();document.getElementById('f-img-name').textContent=x.upload;ok.focus&&ok.scrollIntoView({block:'nearest'})})
       .catch(function(){er.hidden=false})
       .then(function(){btn.disabled=false;btn.textContent=label});
   });
-  if(fi)fi.addEventListener('change',function(){document.getElementById('f-img-name').textContent=this.files[0]?this.files[0].name:x.upload});
+  document.getElementById('f-img').addEventListener('change',function(){document.getElementById('f-img-name').textContent=this.files[0]?this.files[0].name:x.upload});
 }
 
 var io=null;
@@ -1367,7 +1334,6 @@ var PSLUG={catalogue:'releases',live:'live',journal:'journal',about:'about',appl
 var USEPATH=location.protocol!=='file:'&&/internetweddingmusic\.com$|^localhost$/.test(location.hostname);
 function toPath(h){
   if(h==='sfp') return '/sound-for-picture/';
-  if(h==='brief') return '/sound-for-picture/start/';
   if(h.indexOf('film-')===0&&filmById(h.slice(5))) return '/sound-for-picture/'+h.slice(5)+'/';
   if(h.indexOf('release-')===0&&RSLUG[h.slice(8)]) return '/releases/'+RSLUG[h.slice(8)]+'/';
   if(h.indexOf('artist-')===0&&ASLUG[h.slice(7)]) return '/artists/'+ASLUG[h.slice(7)]+'/';
@@ -1377,7 +1343,7 @@ function toPath(h){
 function fromPath(p){
   var m=p.replace(/\/+$/,'').split('/').filter(Boolean),k;
   if(!m.length) return 'home';
-  if(m[0]==='sound-for-picture'){if(!m[1])return 'sfp';if(m[1]==='start')return 'brief';if(filmById(m[1]))return 'film-'+m[1];return 'sfp'}
+  if(m[0]==='sound-for-picture'){if(!m[1])return 'sfp';if(filmById(m[1]))return 'film-'+m[1];return 'sfp'}
   if(m[0]==='releases'&&m[1]){for(k in RSLUG)if(RSLUG[k]===m[1])return 'release-'+k}
   if(m[0]==='artists'&&m[1]){for(k in ASLUG)if(ASLUG[k]===m[1])return 'artist-'+k}
   for(k in PSLUG)if(PSLUG[k]===m[0]&&!m[1])return k;
@@ -1388,13 +1354,13 @@ function readLoc(){var h=(location.hash||'').slice(1), p=USEPATH?fromPath(locati
 function linkify(root){if(!USEPATH)return;(root||document).querySelectorAll('a[href^="#"]').forEach(function(a){var h=a.getAttribute('href').slice(1);if(h){a.setAttribute('data-h',h);a.setAttribute('href',toPath(h))}})}
 var cur=readLoc();
 if(USEPATH&&location.hash&&pageOf(cur)!=='home'){try{history.replaceState(null,'',toPath(cur))}catch(e){}}
-function pageOf(h){return /^(release|artist|film)-/.test(h)||['sfp','brief','apply','catalogue','live','journal','about','work-with-us'].indexOf(h)>-1?h:'home'}
+function pageOf(h){return /^(release|artist|film)-/.test(h)||['sfp','apply','catalogue','live','journal','about','work-with-us'].indexOf(h)>-1?h:'home'}
 function wipeColor(h){
   if(h.indexOf('release-')===0){var r=RELEASES.filter(function(o){return o.id===h.slice(8)})[0];if(r)return [r.bg,r.fg]}
   if(h.indexOf('artist-')===0){var a=ARTISTS[h.slice(7)];if(a)return [a.hero,a.fg]}
   if(h==='catalogue')return ['#87BCF4','#1A1A1A'];
   if(h==='apply')return ['#E9FF8A','#1A1A1A'];
-  if(h==='sfp'||h==='brief'||h.indexOf('film-')===0)return ['#1A1A1A','#FFFFFF'];
+  if(h==='sfp'||h.indexOf('film-')===0)return ['#1A1A1A','#FFFFFF'];
   return ['#F763D8','#1A1A1A'];
 }
 var wiping=false;
@@ -1583,7 +1549,6 @@ function route(keepScroll){
   if(h.indexOf('release-')===0){var r=RELEASES.filter(function(o){return o.id===h.slice(8)})[0];html=r?release(r):home()}
   else if(h.indexOf('artist-')===0){var k=h.slice(7);html=ARTISTS[k]?artist(k):home()}
   else if(h==='apply'){html=apply()}
-  else if(h==='brief'){html=apply('film')}
   else if(h==='sfp'){html=sfpPage()}
   else if(h.indexOf('film-')===0){var F=filmById(h.slice(5));html=F?film(F):sfpPage()}
   else if(h==='catalogue'){html=catalogue()}
@@ -1598,8 +1563,7 @@ function route(keepScroll){
   document.title=({apply:t().apply.h,catalogue:t().catTitle,live:t().liveTitle,journal:t().jTitle,about:t().aTitle,'work-with-us':t().jbTitle}[h]?{apply:t().apply.h,catalogue:t().catTitle,live:t().liveTitle,journal:t().jTitle,about:t().aTitle,'work-with-us':t().jbTitle}[h]+' · ':'')+'Internet Wedding';
   (function(){var R=h.indexOf('release-')===0&&RELEASES.filter(function(o){return o.id===h.slice(8)})[0],Ak=h.indexOf('artist-')===0&&ARTISTS[h.slice(7)];
     var Fm=h.indexOf('film-')===0&&filmById(h.slice(5));
-    if(Fm)document.title=Fm.title+' · Sound for Picture · Internet Wedding';else if(h==='sfp')document.title='Sound for Picture · Internet Wedding';else if(h==='brief')document.title=t().brief.h+' · Sound for Picture · Internet Wedding';else
-    if(R)document.title=R.title+' · '+ARTISTS[R.artist].name+' · Internet Wedding';else if(Ak)document.title=Ak.name+' · Internet Wedding';else if(pageOf(h)==='home')document.title='Internet Wedding · Independent record label, Istanbul'})();
+    if(Fm)document.title=Fm.title+' · Sound for Picture · Internet Wedding';else if(h==='sfp')document.title='Sound for Picture · Internet Wedding';else if(R)document.title=R.title+' · '+ARTISTS[R.artist].name+' · Internet Wedding';else if(Ak)document.title=Ak.name+' · Internet Wedding';else if(pageOf(h)==='home')document.title='Internet Wedding · Independent record label, Istanbul'})();
   linkify(); bindApply(); bindCatalogue(); reveal(); mwInit(); iwAnimInit();
   if(keepScroll) return;
   if(sectionTarget){var el=document.getElementById(sectionTarget); if(el) el.scrollIntoView()} else window.scrollTo(0,0);
