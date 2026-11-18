@@ -1224,6 +1224,7 @@ function bindJobForm(){
   ['j-name','j-email','j-about'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')chk(id)})});
   ['j-cv','j-pf'].forEach(function(id){var lbl=id==='j-cv'?x.cv:x.pf;document.getElementById(id).addEventListener('change',function(){document.getElementById(id+'-n').textContent=this.files[0]?this.files[0].name:lbl;chk(id)})});
   var ok=document.getElementById('j-ok'),er=document.getElementById('j-err'),btn=f.querySelector('button[type=submit]');
+  if(/[?&]sent=1/.test(location.search)){ok.hidden=false;setTimeout(function(){document.getElementById('jf').scrollIntoView({block:'start'});ok.focus()},300)}
   f.addEventListener('submit',function(e){e.preventDefault();
     var first=null;Object.keys(rules).forEach(function(id){if(!chk(id)&&!first)first=id});
     ok.hidden=true;er.hidden=true;
@@ -1232,13 +1233,17 @@ function bindJobForm(){
     var label=btn.textContent;btn.disabled=true;btn.textContent=x.sending;btn.setAttribute('aria-busy','true');
     var v=function(id){return document.getElementById(id).value.trim()};
     var cv=document.getElementById('j-cv').files[0], pf=document.getElementById('j-pf').files[0];
-    var fd=new FormData();
-    fd.append('_subject','Application: '+role+' · '+v('j-name'));fd.append('_template','table');fd.append('_captcha','false');fd.append('_replyto',v('j-email'));
-    fd.append('Role',role);fd.append('Name',v('j-name'));fd.append('Email',v('j-email'));fd.append('About',v('j-about'));fd.append('Portfolio link',v('j-link')||'-');
-    fd.append('Files',[cv&&('CV: '+cv.name),pf&&('Portfolio: '+pf.name)].filter(Boolean).join(' · '));fd.append('Language',lang);
-    if(cv) fd.append('attachment',cv,cv.name);
-    if(pf) fd.append('attachment',pf,pf.name);
-    fd.append('_honey','');
+    // FormSubmit ekleri yalnız normal (AJAX olmayan) form gönderiminde iletiyor (18 Kasım testi)
+    [].forEach.call(f.querySelectorAll('input[data-fs]'),function(i){i.remove()});
+    var add=function(n,val){var i=document.createElement('input');i.type='hidden';i.name=n;i.value=val;i.setAttribute('data-fs','1');f.appendChild(i)};
+    add('_subject','Application: '+role+' · '+v('j-name'));add('_template','table');add('_captcha','false');add('_replyto',v('j-email'));
+    add('_next',location.origin+location.pathname+'?sent=1');add('_honey','');
+    add('Role',role);add('Name',v('j-name'));add('Email',v('j-email'));add('About',v('j-about'));add('Portfolio link',v('j-link')||'-');
+    add('Files',[cv&&('CV: '+cv.name),pf&&('Portfolio: '+pf.name)].filter(Boolean).join(' · '));add('Language',lang);
+    document.getElementById('j-cv').name='attachment';document.getElementById('j-pf').name=pf?'attachment':'';
+    f.action='https://formsubmit.co/'+WORK_EMAIL;f.method='POST';f.enctype='multipart/form-data';
+    HTMLFormElement.prototype.submit.call(f);
+    return;
     var ctl=('AbortController' in window)?new AbortController():null, tm=ctl&&setTimeout(function(){ctl.abort()},90000);
     fetch('https://formsubmit.co/ajax/'+WORK_EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd,signal:ctl?ctl.signal:undefined})
       .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
@@ -1395,6 +1400,7 @@ function bindApply(){
   var rules={'f-name':function(v){return v.trim()?'':x.eName},'f-link':function(v){return /^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/.test(v)?'':x.eLink},'f-email':function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?'':x.eEmail}};
   function chk(id){var el=document.getElementById(id),m=rules[id](el.value);document.getElementById(id+'-e').textContent=m;el.setAttribute('aria-invalid',m?'true':'false');return !m}
   Object.keys(rules).forEach(function(id){document.getElementById(id).addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')chk(id)})});
+  if(/[?&]sent=1/.test(location.search)){var ok0=document.getElementById('f-ok');ok0.hidden=false;setTimeout(function(){ok0.scrollIntoView({block:'center'})},300)}
   f.addEventListener('submit',function(e){e.preventDefault();var first=null;Object.keys(rules).forEach(function(id){if(!chk(id)&&!first)first=id});
     var ok=document.getElementById('f-ok'),er=document.getElementById('f-err'),btn=f.querySelector('button[type=submit]');ok.hidden=true;er.hidden=true;
     if(first){document.getElementById(first).focus();return}
@@ -1404,8 +1410,13 @@ function bindApply(){
     var fd=new FormData(), v=function(id){return document.getElementById(id).value.trim()}, img=document.getElementById('f-img').files[0];
     fd.append('_subject','Submit Music: '+v('f-name'));fd.append('_template','table');fd.append('_captcha','false');fd.append('_replyto',v('f-email'));
     fd.append('Artist',v('f-name'));fd.append('Music link',v('f-link'));fd.append('Email',v('f-email'));fd.append('Message',v('f-msg')||'-');fd.append('Needs',needs.join(', ')||'-');fd.append('Newsletter',document.getElementById('f-nl').checked?'Yes':'No');fd.append('Language',lang);
-    if(img) fd.append('attachment',img,img.name);
-    fd.append('_honey','');
+    [].forEach.call(f.querySelectorAll('input[data-fs]'),function(i){i.remove()});
+    fd.append('_next',location.origin+location.pathname+'?sent=1');fd.append('_honey','');
+    fd.forEach(function(val,n){var i=document.createElement('input');i.type='hidden';i.name=n;i.value=val;i.setAttribute('data-fs','1');f.appendChild(i)});
+    document.getElementById('f-img').name=img?'attachment':'';
+    f.action='https://formsubmit.co/'+SUBMIT_EMAIL;f.method='POST';f.enctype='multipart/form-data';
+    HTMLFormElement.prototype.submit.call(f);
+    return;
     fetch('https://formsubmit.co/ajax/'+SUBMIT_EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
       .then(function(){ok.hidden=false;f.reset();document.getElementById('f-img-name').textContent=x.upload;ok.focus&&ok.scrollIntoView({block:'nearest'})})
       .catch(function(){er.hidden=false})
