@@ -528,19 +528,33 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
 (function(){
 document.documentElement.classList.add('js');
 var LOGO_STACK_W = "<svg role=\"img\" aria-label=\"Internet Wedding\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"140 338 800 402\" fill=\"#ffffff\">\n  \n  <rect x=\"146.52\" y=\"344.24\" width=\"38.9\" height=\"190.08\" rx=\"5.17\" ry=\"5.17\"/>\n  <path d=\"M201.48,534.32h26.19c2.85,0,5.17-2.31,5.17-5.17v-89.36l25.17,90.74c.62,2.24,2.66,3.78,4.98,3.78h32.53c2.85,0,5.17-2.31,5.17-5.17v-179.75c0-2.85-2.31-5.17-5.17-5.17h-26.19c-2.85,0-5.17,2.31-5.17,5.17v86.97l-24.78-88.36c-.63-2.23-2.66-3.77-4.97-3.77h-32.93c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17Z\"/>\n  <path d=\"M311.77,384.28h25.78v144.88c0,2.85,2.31,5.17,5.17,5.17h28.57c2.85,0,5.17-2.31,5.17-5.17v-144.88h25.78c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17h-90.46c-2.85,0-5.17,2.31-5.17,5.17v29.71c0,2.85,2.31,5.17,5.17,5.17Z\"/>\n  <path d=\"M504.8,529.15v-29.71c0-2.85-2.31-5.17-5.17-5.17h-47.4v-38h42.44c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17h-42.44v-31.96h45.42c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17h-79.15c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17h81.14c2.85,0,5.17-2.31,5.17-5.17Z\"/>\n  <path d=\"M517.88,534.32h28.57c2.85,0,5.17-2.31,5.17-5.17v-70.86h10.11c5.43,0,7.35,2.06,8.31,3.61,2.02,3.24,3.16,7.97,3.39,14l.8,34.56c.13,3.62.41,7.2.83,10.63.48,3.96,1.64,7.54,3.43,10.65.92,1.6,2.63,2.58,4.47,2.58h30.95c2.85,0,5.17-2.31,5.17-5.17v-1.51c0-1.69-.83-3.27-2.21-4.24-1.38-.96-2.43-3.36-2.99-6.76-.51-4.88-.89-12.06-1.15-21.37-.13-4.88-.27-9.29-.4-13.25-.13-4-.34-7.76-.61-11.18-.88-11.14-3.21-19.17-7.13-24.54-1.93-2.65-4.37-4.85-7.29-6.62,4.09-3.03,7.4-7.06,9.92-12.06,4.18-8.33,6.3-19.06,6.3-31.9,0-16.81-3.76-29.68-11.18-38.25-7.61-8.78-18.27-13.24-31.68-13.24h-52.77c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17ZM559.94,381.25c12.93,0,14.67,9.99,14.67,19.76,0,8.25-1.46,14.24-4.23,17.31-2.7,3-6.64,4.46-12.03,4.46h-6.74v-41.53h8.32Z\"/>\n  <path d=\"M727.37,529.15v-179.75c0-2.85-2.31-5.17-5.17-5.17h-26.19c-2.85,0-5.17,2.31-5.17,5.17v86.97l-24.78-88.36c-.63-2.23-2.66-3.77-4.97-3.77h-32.93c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17h26.19c2.85,0,5.17-2.31,5.17-5.17v-89.36l25.17,90.74c.62,2.24,2.66,3.78,4.98,3.78h32.53c2.85,0,5.17-2.31,5.17-5.17Z\"/>\n  <path d=\"M742.04,534.32h81.14c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17h-47.4v-38h42.45c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17h-42.45v-31.96h45.42c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17h-79.15c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17Z\"/>\n  <path d=\"M928.31,344.24h-90.46c-2.85,0-5.17,2.31-5.17,5.17v29.71c0,2.85,2.31,5.17,5.17,5.17h25.78v144.88c0,2.85,2.31,5.17,5.17,5.17h28.57c2.85,0,5.17-2.31,5.17-5.17v-144.88h25.78c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17Z\"/>\n  <path d=\"M310.09,542.91h-27.38c-2.62,0-4.82,1.96-5.13,4.56l-10.89,92.38-11.59-92.42c-.32-2.58-2.52-4.52-5.12-4.52h-27.38c-2.6,0-4.8,1.94-5.12,4.52l-11.59,92.42-10.89-92.38c-.31-2.6-2.51-4.56-5.13-4.56h-27.38c-1.5,0-2.92.65-3.9,1.78-.98,1.13-1.42,2.63-1.21,4.12l25.79,179.75c.36,2.54,2.54,4.43,5.11,4.43h31.94c2.61,0,4.81-1.95,5.13-4.54l10.94-89.9,10.94,89.9c.32,2.59,2.52,4.54,5.13,4.54h31.94c2.57,0,4.75-1.89,5.11-4.43l25.79-179.75c.21-1.48-.23-2.98-1.21-4.12-.98-1.13-2.4-1.78-3.9-1.78Z\"/>\n  <path d=\"M406.7,692.95h-47.4v-38h42.44c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17h-42.44v-31.96h45.42c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17h-79.15c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17h81.14c2.85,0,5.17-2.31,5.17-5.17v-29.71c0-2.85-2.31-5.17-5.17-5.17Z\"/>\n  <path d=\"M516.06,569.78s0,0,0,0c-3.75-8.5-9.14-15.16-16.02-19.81-6.93-4.68-15.98-7.05-26.89-7.05h-46.82c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17h45.03c10.42,0,19.25-2.11,26.24-6.26,7.06-4.19,12.74-10.6,16.88-19.04,3.93-8.03,6.73-18.26,8.32-30.43,1.54-11.84,2.32-25.92,2.32-41.83,0-13.38-.61-25.69-1.82-36.57-1.24-11.21-3.68-21-7.25-29.08ZM460.06,579.93h6.94c4.19,0,7.47.93,9.76,2.76,2.42,1.95,4.33,5.03,5.66,9.14,1.52,4.7,2.54,10.76,3.04,18.02.52,7.6.78,16.54.78,26.58,0,12.07-.3,22.28-.88,30.34-.56,7.72-1.67,13.96-3.29,18.54-1.42,4-3.23,6.81-5.38,8.35-2.13,1.53-5.19,2.3-9.09,2.3h-7.53v-116.05Z\"/>\n  <path d=\"M625.96,569.78h0c-3.75-8.5-9.14-15.16-16.02-19.82-6.93-4.68-15.98-7.05-26.89-7.05h-46.82c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17h45.03c10.42,0,19.25-2.11,26.24-6.26,7.06-4.19,12.74-10.6,16.88-19.04,3.93-8.03,6.73-18.27,8.32-30.43,1.54-11.85,2.33-25.92,2.33-41.83,0-13.38-.61-25.69-1.82-36.57-1.24-11.21-3.68-21-7.25-29.08ZM569.96,579.93h6.93c4.19,0,7.47.93,9.76,2.76,2.42,1.95,4.33,5.03,5.66,9.14,1.51,4.7,2.54,10.76,3.04,18.02.52,7.6.78,16.55.78,26.58,0,12.07-.3,22.28-.88,30.34h0c-.56,7.72-1.66,13.96-3.29,18.54-1.42,4-3.23,6.81-5.38,8.35-2.13,1.53-5.19,2.3-9.09,2.3h-7.53v-116.05Z\"/>\n  <rect x=\"640.96\" y=\"542.91\" width=\"38.9\" height=\"190.08\" rx=\"5.17\" ry=\"5.17\"/>\n  <path d=\"M789.95,542.91h-26.19c-2.85,0-5.17,2.31-5.17,5.17v86.97l-24.78-88.36c-.63-2.23-2.66-3.77-4.97-3.77h-32.93c-2.85,0-5.17,2.31-5.17,5.17v179.75c0,2.85,2.31,5.17,5.17,5.17h26.19c2.85,0,5.17-2.31,5.17-5.17v-89.36l25.17,90.74c.62,2.24,2.66,3.78,4.98,3.78h32.53c2.85,0,5.17-2.31,5.17-5.17v-179.75c0-2.85-2.31-5.17-5.17-5.17Z\"/>\n  <path d=\"M901.63,625.74h-46.22c-2.85,0-5.17,2.31-5.17,5.17v26.69c0,2.85,2.31,5.17,5.17,5.17h13.68v13.21c0,4.29-.51,8.03-1.53,11.1-1.01,3.05-2.24,5.55-3.67,7.43-1.35,1.78-2.77,3.1-4.21,3.93-1.21.7-2.31,1.08-3.08,1.08-2.52,0-4.36-.91-5.96-2.94-2.09-2.65-3.76-6.7-4.97-12.04-1.32-5.83-2.25-13.05-2.76-21.45-.52-8.56-.78-18.28-.78-28.89,0-21.87,1.46-37.61,4.33-46.79,3.43-10.98,8.17-10.98,9.95-10.98,1.6,0,2.8.46,3.9,1.49,1.55,1.46,2.85,3.36,3.89,5.66,1.14,2.53,1.98,5.37,2.5,8.44.54,3.22.82,6.41.82,9.46,0,2.85,2.31,5.17,5.17,5.17h27.38c2.85,0,5.17-2.31,5.17-5.17,0-19.29-3.79-34.47-11.25-45.13-7.87-11.23-20.64-16.93-37.95-16.93-10.08,0-18.69,2.22-25.58,6.6-6.88,4.37-12.45,10.88-16.56,19.35-3.93,8.1-6.73,18.24-8.31,30.14-1.54,11.58-2.33,25.2-2.33,40.46s.54,29.72,1.61,41.62c1.1,12.26,3.31,22.77,6.58,31.23,3.47,8.99,8.43,15.8,14.74,20.24,6.35,4.47,14.53,6.73,24.3,6.73,7.67,0,14.41-1.74,20.04-5.16,1.73-1.05,3.38-2.32,4.95-3.79v1.02c0,2.85,2.31,5.17,5.17,5.17h21.03c2.85,0,5.17-2.31,5.17-5.17v-96.92c0-2.85-2.31-5.17-5.17-5.17Z\"/>\n</svg>";
-var EMAIL = 'atakan@internetweddingmusic.com';
+var EMAIL = 'info@internetweddingmusic.com';
+var WORK_EMAIL = 'work@internetweddingmusic.com';
+var SUBMIT_EMAIL = 'atakan@internetweddingmusic.com';
 
 var T = {
  en:{
   nav:{releases:'Releases',artists:'Artists',work:'How we work',about:'About'},
   menu:'Menu', close:'Close',
   jNav:'Work with us', jbTitle:'Work with us', jbIntro:'Open roles go up here first. Nothing that fits? Write to us anyway.', jbOpen:'Open roles',
-  jobs:[{id:'artist-marketing',title:'Artist Marketing',tag:'Istanbul',
-    lead:'We’re looking for someone to run marketing and social media for our artists’ releases, from the first plan to the daily posts.',
-    parts:[['Planning releases','You build the marketing plan for each release with the artist and our team, and you adjust it as the campaign goes.'],['Running social media','You plan the content calendar, make and publish the content, and keep every artist’s voice their own.']],
-    subject:'Artist Marketing'}],
-  jbHow:'How to apply', jbHowText:'Send a few lines about yourself and some of the work you’ve done to {mail}, with the role in the subject line.', jbBtn:'Apply by email',
+  jobs:[{id:'social-media-manager',title:'Social Media Manager',tag:'Istanbul · Freelance',
+    lead:'We’re looking for a social media manager for Internet Wedding and our artists’ accounts.',
+    parts:[['Running the accounts','You plan the content calendar, make and publish the posts, and keep every artist’s voice their own.'],['Working with the team','You turn release and live plans into posts together with the artists and our team, and keep track of what works.']],
+    subject:'Social Media Manager'}],
+  jbApply:'Apply for this role',
   jbOpenApp:'Open application', jbOpenText:'Tell us what you do and how you’d like to work with independent artists.', jbOpenBtn:'Write to us',
+  jf:{lbl:'Application',h:'Apply',intro:'Fill this in and attach your CV. It comes straight to our inbox and we reply by email.',
+    you:'About you', youText:'So we know who you are and how to reach you.',
+    name:'Full name', email:'Email', about:'A few words about you', aboutHint:'Who you are, what you’ve worked on and why this role. A few lines is enough.',
+    files:'CV and portfolio', filesText:'PDF, Word, JPG or PNG. Up to 5 MB each.',
+    cv:'Upload your CV', cvHint:'PDF or Word, up to 5 MB', pf:'Upload your portfolio', pfHint:'PDF, JPG or PNG, up to 5 MB',
+    link:'Portfolio or Instagram link', linkHint:'If your work is online or your portfolio file is too big.',
+    req:'Required', opt:'Optional', send:'Send', privacy:'We only use what you send us to assess your application.',
+    submit:'Send application', sending:'Sending…',
+    eName:'Add your name.', eEmail:'Add an email address we can reply to, like name@example.com.', eAbout:'Write a few words about yourself.', eCv:'Attach your CV.',
+    eType:'This file type isn’t supported. Use PDF, Word, JPG or PNG.', eSize:'This file is over 5 MB. Upload a smaller file, or add a link instead.',
+    ok:'Thanks, your application is in. We read every one and will reply by email.',
+    fail:'Something went wrong and your application didn’t send. Please try again. If it still doesn’t work, email your CV to {mail}.'},
   nLive:'Live', nJournal:'Journal',
   liveTitle:'Live', upcomingShows:'Upcoming', pastShows:'Past', noUpcoming:'No dates announced yet. Follow the artists for new shows.',
   jTitle:'Journal', jIntro:'News from the label, as it happens.', readOn:'Go to page', onRepeat:'On repeat', onRepeatText:'The whole catalogue in one queue, straight from the label.', playAll:'Play the catalogue',
@@ -595,18 +609,30 @@ var T = {
     opt:'Optional', nl:'Send me the newsletter',
     send:'Send', sendText:'We reply by email.', submit:'Send submission', cancel:'Cancel',
     eName:'Add your artist or band name.', eLink:'Add a link where we can hear your music.', eEmail:'Add an email address we can reply to, like name@example.com.',
-    ok:'Thanks, your submission is in. We listen to everything and will write back if it’s a fit.', sending:'Sending…', fail:'Something went wrong and it didn’t send. Please try again, or email us at atakan@internetweddingmusic.com.'}
+    ok:'Thanks, your submission is in. We listen to everything and will write back if it’s a fit.', sending:'Sending…', fail:'Something went wrong and it didn’t send. Please try again, or email us at info@internetweddingmusic.com.'}
  },
  tr:{
   nav:{releases:'Yayınlar',artists:'Sanatçılar',work:'Nasıl çalışıyoruz',about:'Hakkında'},
   menu:'Menü', close:'Kapat',
   jNav:'Bizimle çalış', jbTitle:'Bizimle çalış', jbIntro:'Açık pozisyonları önce burada duyuruyoruz. Sana uyan bir şey yoksa yine de yaz.', jbOpen:'Açık pozisyonlar',
-  jobs:[{id:'artist-marketing',title:'Sanatçı Pazarlaması',tag:'İstanbul',
-    lead:'Sanatçılarımızın yayınlarının pazarlamasını ve sosyal medyasını ilk plandan gündelik paylaşımlara kadar yürütecek birini arıyoruz.',
-    parts:[['Yayınları planlamak','Her yayının pazarlama planını sanatçıyla ve ekibimizle birlikte kuruyor, kampanya ilerledikçe güncelliyorsun.'],['Sosyal medyayı yürütmek','İçerik takvimini planlıyor, içerikleri üretip yayınlıyor ve her sanatçının sesini kendine ait tutuyorsun.']],
-    subject:'Artist Marketing'}],
-  jbHow:'Nasıl başvurulur', jbHowText:'Kendini ve yaptığın birkaç işi anlatan kısa bir notu {mail} adresine gönder; konu satırına pozisyonun adını yaz.', jbBtn:'E-postayla başvur',
+  jobs:[{id:'social-media-manager',title:'Sosyal Medya Yöneticisi',tag:'İstanbul · Freelance',
+    lead:'Internet Wedding’in ve sanatçılarımızın hesapları için bir sosyal medya yöneticisi arıyoruz.',
+    parts:[['Hesapları yürütmek','İçerik takvimini planlıyor, paylaşımları üretip yayınlıyor ve her sanatçının sesini kendine ait tutuyorsun.'],['Ekiple çalışmak','Yayın ve konser planlarını sanatçılarla ve ekibimizle birlikte paylaşımlara çeviriyor, neyin işe yaradığını takip ediyorsun.']],
+    subject:'Social Media Manager'}],
+  jbApply:'Bu pozisyona başvur',
   jbOpenApp:'Açık başvuru', jbOpenText:'Ne yaptığını ve bağımsız sanatçılarla nasıl çalışmak istediğini anlat.', jbOpenBtn:'Bize yaz',
+  jf:{lbl:'Başvuru',h:'Başvur',intro:'Formu doldur, CV’ni ekle. Başvurun doğrudan bize ulaşır, dönüşü e-postayla yapıyoruz.',
+    you:'Seni tanıyalım', youText:'Kim olduğunu ve sana nasıl ulaşacağımızı bilelim.',
+    name:'Ad soyad', email:'E-posta', about:'Kendinden kısaca bahset', aboutHint:'Kimsin, neler yaptın, bu pozisyonu neden istiyorsun. Birkaç satır yeter.',
+    files:'CV ve portfolyo', filesText:'PDF, Word, JPG ya da PNG. Her dosya en fazla 5 MB.',
+    cv:'CV’ni yükle', cvHint:'PDF ya da Word, en fazla 5 MB', pf:'Portfolyonu yükle', pfHint:'PDF, JPG ya da PNG, en fazla 5 MB',
+    link:'Portfolyo ya da Instagram linki', linkHint:'İşlerin internetteyse ya da portfolyo dosyan çok büyükse.',
+    req:'Zorunlu', opt:'İsteğe bağlı', send:'Gönder', privacy:'Gönderdiğin bilgileri yalnızca başvurunu değerlendirmek için kullanırız.',
+    submit:'Başvuruyu gönder', sending:'Gönderiliyor…',
+    eName:'Adını yaz.', eEmail:'Sana dönebileceğimiz bir e-posta adresi yaz, örneğin ad@ornek.com.', eAbout:'Kendinden birkaç cümleyle bahset.', eCv:'CV’ni ekle.',
+    eType:'Bu dosya türü desteklenmiyor. PDF, Word, JPG ya da PNG kullan.', eSize:'Bu dosya 5 MB’tan büyük. Daha küçük bir dosya yükle ya da link ekle.',
+    ok:'Teşekkürler, başvurun bize ulaştı. Her başvuruyu okuyoruz, sana e-postayla döneceğiz.',
+    fail:'Bir sorun oldu ve başvurun gönderilemedi. Tekrar dene; yine olmazsa CV’ni {mail} adresine gönder.'},
   nLive:'Konserler', nJournal:'Günlük',
   liveTitle:'Konserler', upcomingShows:'Yaklaşan', pastShows:'Geçmiş', noUpcoming:'Henüz açıklanmış tarih yok. Yeni konserler için sanatçıları takip edin.',
   jTitle:'Günlük', jIntro:'Plak şirketinden haberler, oldukça.', readOn:'Sayfaya git', onRepeat:'Tekrarda', onRepeatText:'Tüm katalog tek bir sırada, doğrudan plak şirketinden.', playAll:'Kataloğu çal',
@@ -661,7 +687,7 @@ var T = {
     opt:'İsteğe bağlı', nl:'Bülteni almak istiyorum',
     send:'Gönder', sendText:'Dönüşü e-postayla yapıyoruz.', submit:'Başvuruyu gönder', cancel:'Vazgeç',
     eName:'Sanatçı ya da grup adını yaz.', eLink:'Müziğini dinleyebileceğimiz bir link ekle.', eEmail:'Sana dönebileceğimiz bir e-posta adresi yaz, örneğin ad@ornek.com.',
-    ok:'Teşekkürler, başvurun bize ulaştı. Gelen her şeyi dinliyoruz; uygun olursa sana yazacağız.', sending:'Gönderiliyor…', fail:'Bir sorun oldu ve gönderilemedi. Tekrar dene ya da atakan@internetweddingmusic.com adresine yaz.'}
+    ok:'Teşekkürler, başvurun bize ulaştı. Gelen her şeyi dinliyoruz; uygun olursa sana yazacağız.', sending:'Gönderiliyor…', fail:'Bir sorun oldu ve gönderilemedi. Tekrar dene ya da info@internetweddingmusic.com adresine yaz.'}
  }
 };
 
@@ -1138,7 +1164,6 @@ function aboutPage(){
 
 function jobsPage(){
   var x=t();
-  var mail='<a href="mailto:'+EMAIL+'" style="overflow-wrap:anywhere">'+EMAIL+'</a>';
   var h=pageHead('var(--white)','var(--black)',x.jbOpen,x.jbTitle)
    +'<section class="in two" style="padding-top:40px;padding-bottom:24px;align-items:center"><p class="lede rv" style="margin:0;max-width:46ch">'+x.jbIntro+'</p><div class="apply-stamp rv">'+art('iwline',{label:'Internet Wedding'})+'</div></section>'
    +'<section class="in" style="padding-top:24px;padding-bottom:72px;display:flex;flex-direction:column;gap:20px"><h2 class="lbl rv" style="margin:0">'+x.jbOpen+' · '+x.jobs.length+'</h2>';
@@ -1146,13 +1171,83 @@ function jobsPage(){
     h+='<article class="job rv" id="'+j.id+'">'
      +'<div class="job-head"><span class="lbl">'+esc(j.tag)+'</span><h3 class="hd">'+esc(j.title)+'</h3><p>'+esc(j.lead)+'</p></div>'
      +'<div class="job-parts">'+j.parts.map(function(p){return '<div><h4 class="hd">'+esc(p[0])+'</h4><p>'+esc(p[1])+'</p></div>'}).join('')+'</div>'
-     +'<div class="job-foot"><div><span class="lbl">'+x.jbHow+'</span><p>'+x.jbHowText.replace('{mail}',mail)+'</p></div>'
-     +'<a class="btn dark" href="mailto:'+EMAIL+'?subject='+encodeURIComponent(j.subject)+'" style="min-height:56px;padding:0 24px;flex:none">'+x.jbBtn+' →︎</a></div></article>';
+     +'<div class="job-foot" style="justify-content:flex-end">'
+     +'<button type="button" class="btn dark" data-jf="1" aria-controls="jf" style="min-height:56px;padding:0 24px;flex:none">'+x.jbApply+' ↓︎</button></div></article>';
   });
-  h+='</section><section style="background:var(--black);color:var(--white)"><div class="in two" style="padding-top:56px;padding-bottom:56px;align-items:center">'
+  h+='</section>'+jobForm(x.jobs[0]);
+  h+='<section style="background:var(--black);color:var(--white)"><div class="in two" style="padding-top:56px;padding-bottom:56px;align-items:center">'
    +'<div style="display:flex;flex-direction:column;gap:12px"><span class="lbl rv" style="color:var(--lime)">'+x.jbOpenApp+'</span><p class="hd rv" style="font-size:clamp(28px,3.6vw,52px);line-height:1.1;margin:0;max-width:22ch">'+x.jbOpenText+'</p></div>'
-   +'<a class="btn rv" href="mailto:'+EMAIL+'?subject='+encodeURIComponent(x.jbOpenApp)+'" style="min-height:64px;padding:0 28px;font-size:17px;flex:none">'+x.jbOpenBtn+' →︎</a></div></section>';
+   +'<a class="btn rv" href="mailto:'+WORK_EMAIL+'?subject='+encodeURIComponent(x.jbOpenApp)+'" style="min-height:64px;padding:0 28px;font-size:17px;flex:none">'+x.jbOpenBtn+' →︎</a></div></section>';
   return h;
+}
+
+function jobForm(j){
+  var x=t().jf;
+  function fld(id,type,label,hint,req,ac){return '<div class="fld"><label for="'+id+'">'+label+'<span class="req">'+req+'</span></label>'+(hint?'<span class="mute" style="font-size:14px" id="'+id+'-h">'+hint+'</span>':'')+'<input class="tx" id="'+id+'" type="'+type+'" autocomplete="'+ac+'"'+(hint?' aria-describedby="'+id+'-h"':'')+'><span class="err" id="'+id+'-e"></span></div>'}
+  function drop(id,label,hint,req,accept){return '<div class="fld"><label class="drop" for="'+id+'"><span class="plus hd" aria-hidden="true">+</span><span style="display:flex;flex-direction:column"><span style="font-weight:500"><span id="'+id+'-n">'+label+'</span><span class="req">'+req+'</span></span><span style="font-size:14px" id="'+id+'-h">'+hint+'</span></span><input id="'+id+'" type="file" accept="'+accept+'" aria-describedby="'+id+'-h '+id+'-e"></label><span class="err" id="'+id+'-e"></span></div>'}
+  return '<section id="jf" data-role="'+esc(j.subject)+'" style="background:var(--lime);border-top:2px solid var(--black);border-bottom:2px solid var(--black)"><div class="in" style="padding-top:22px;padding-bottom:40px;display:flex;flex-direction:column;gap:24px">'
+   +'<div class="lbl rv" style="display:flex;justify-content:space-between;gap:16px"><span>'+esc(j.title)+'</span><span>'+x.lbl+'</span></div>'
+   +'<h2 class="hd rv" style="font-size:clamp(52px,9vw,136px);line-height:1;margin:0">'+x.h+'</h2>'
+   +'<p class="lede rv" style="margin:0;max-width:44ch">'+x.intro+'</p></div></section>'
+   +'<form class="in" id="jff" novalidate style="padding-top:8px;padding-bottom:72px">'
+   +'<div class="block rv"><div><h3 class="bh">'+x.you+'</h3><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.youText+'</p></div><div style="display:flex;flex-direction:column;gap:18px;min-width:0">'
+   +fld('j-name','text',x.name,'',x.req,'name')
+   +fld('j-email','email',x.email,'',x.req,'email')
+   +'<div class="fld"><label for="j-about">'+x.about+'<span class="req">'+x.req+'</span></label><span class="mute" style="font-size:14px" id="j-about-h">'+x.aboutHint+'</span><textarea class="tx" id="j-about" rows="6" maxlength="3000" aria-describedby="j-about-h"></textarea><span class="err" id="j-about-e"></span></div>'
+   +'</div></div>'
+   +'<div class="block rv"><div><h3 class="bh">'+x.files+'</h3><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.filesText+'</p></div><div style="display:flex;flex-direction:column;gap:18px;min-width:0">'
+   +drop('j-cv',x.cv,x.cvHint,x.req,'.pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+   +drop('j-pf',x.pf,x.pfHint,x.opt,'.pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png')
+   +fld('j-link','url',x.link,x.linkHint,x.opt,'url')
+   +'</div></div>'
+   +'<div class="block rv"><div><h3 class="bh">'+x.send+'</h3><p class="mute" style="margin:6px 0 0;font-size:14px">'+x.privacy+'</p></div><div style="display:flex;flex-direction:column;gap:14px;min-width:0">'
+   +'<div style="display:flex;gap:12px;flex-wrap:wrap"><button type="submit" class="btn dark">'+x.submit+'</button></div>'
+   +'<div class="done" id="j-ok" role="status" tabindex="-1" hidden>'+x.ok+'</div><div class="done" id="j-err" role="alert" hidden style="background:var(--red);color:var(--white)"></div></div></div><div class="end"></div></form>';
+}
+
+function bindJobForm(){
+  var f=document.getElementById('jff'); if(!f) return;
+  var x=t().jf, MAX=5*1024*1024;
+  var role=document.getElementById('jf').getAttribute('data-role');
+  [].forEach.call(document.querySelectorAll('[data-jf]'),function(a){a.addEventListener('click',function(e){e.preventDefault();var s=document.getElementById('jf');s.scrollIntoView({behavior:IWM.reduce?'auto':'smooth',block:'start'});setTimeout(function(){if(Math.abs(s.getBoundingClientRect().top)>80)s.scrollIntoView({behavior:'instant',block:'start'});document.getElementById('j-name').focus({preventScroll:true})},IWM.reduce?0:700)})});
+  var types={'j-cv':/\.(pdf|docx?)$/i,'j-pf':/\.(pdf|jpe?g|png)$/i};
+  function fileErr(id,req){var fl=document.getElementById(id).files[0];if(!fl)return req?x.eCv:'';if(!types[id].test(fl.name))return x.eType;if(fl.size>MAX)return x.eSize;return ''}
+  var rules={
+    'j-name':function(){return document.getElementById('j-name').value.trim()?'':x.eName},
+    'j-email':function(){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('j-email').value.trim())?'':x.eEmail},
+    'j-about':function(){return document.getElementById('j-about').value.trim().length>=2?'':x.eAbout},
+    'j-cv':function(){return fileErr('j-cv',true)},
+    'j-pf':function(){return fileErr('j-pf',false)}
+  };
+  function chk(id){var el=document.getElementById(id),m=rules[id]();document.getElementById(id+'-e').textContent=m;el.setAttribute('aria-invalid',m?'true':'false');return !m}
+  ['j-name','j-email','j-about'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')chk(id)})});
+  ['j-cv','j-pf'].forEach(function(id){var lbl=id==='j-cv'?x.cv:x.pf;document.getElementById(id).addEventListener('change',function(){document.getElementById(id+'-n').textContent=this.files[0]?this.files[0].name:lbl;chk(id)})});
+  var ok=document.getElementById('j-ok'),er=document.getElementById('j-err'),btn=f.querySelector('button[type=submit]');
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var first=null;Object.keys(rules).forEach(function(id){if(!chk(id)&&!first)first=id});
+    ok.hidden=true;er.hidden=true;
+    if(first){document.getElementById(first).focus();return}
+    if(btn.disabled) return;
+    var label=btn.textContent;btn.disabled=true;btn.textContent=x.sending;btn.setAttribute('aria-busy','true');
+    var v=function(id){return document.getElementById(id).value.trim()};
+    var cv=document.getElementById('j-cv').files[0], pf=document.getElementById('j-pf').files[0];
+    var fd=new FormData();
+    fd.append('_subject','Application: '+role+' · '+v('j-name'));fd.append('_template','table');fd.append('_captcha','false');fd.append('_replyto',v('j-email'));
+    fd.append('Role',role);fd.append('Name',v('j-name'));fd.append('Email',v('j-email'));fd.append('About',v('j-about'));fd.append('Portfolio link',v('j-link')||'-');
+    fd.append('Files',[cv&&('CV: '+cv.name),pf&&('Portfolio: '+pf.name)].filter(Boolean).join(' · '));fd.append('Language',lang);
+    if(cv) fd.append('attachment',cv,cv.name);
+    if(pf) fd.append('attachment',pf,pf.name);
+    fd.append('_honey','');
+    var ctl=('AbortController' in window)?new AbortController():null, tm=ctl&&setTimeout(function(){ctl.abort()},90000);
+    fetch('https://formsubmit.co/ajax/'+WORK_EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd,signal:ctl?ctl.signal:undefined})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
+      .then(function(){ok.hidden=false;f.reset();document.getElementById('j-cv-n').textContent=x.cv;document.getElementById('j-pf-n').textContent=x.pf;ok.focus()})
+      .catch(function(){
+        var subj=encodeURIComponent('Application: '+role+' · '+v('j-name'));
+        var mail='<a href="mailto:'+WORK_EMAIL+'?subject='+subj+'" style="color:inherit;overflow-wrap:anywhere">'+WORK_EMAIL+'</a>';
+        er.innerHTML=esc(x.fail).replace('{mail}',mail);er.hidden=false})
+      .then(function(){if(tm)clearTimeout(tm);btn.disabled=false;btn.textContent=label;btn.removeAttribute('aria-busy')});
+  });
 }
 
 function fMedia(f,big){
@@ -1310,7 +1405,7 @@ function bindApply(){
     fd.append('Artist',v('f-name'));fd.append('Music link',v('f-link'));fd.append('Email',v('f-email'));fd.append('Message',v('f-msg')||'-');fd.append('Needs',needs.join(', ')||'-');fd.append('Newsletter',document.getElementById('f-nl').checked?'Yes':'No');fd.append('Language',lang);
     if(img) fd.append('attachment',img,img.name);
     fd.append('_honey','');
-    fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
+    fetch('https://formsubmit.co/ajax/'+SUBMIT_EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
       .then(function(){ok.hidden=false;f.reset();document.getElementById('f-img-name').textContent=x.upload;ok.focus&&ok.scrollIntoView({block:'nearest'})})
       .catch(function(){er.hidden=false})
       .then(function(){btn.disabled=false;btn.textContent=label});
@@ -1563,7 +1658,7 @@ function route(keepScroll){
   (function(){var R=h.indexOf('release-')===0&&RELEASES.filter(function(o){return o.id===h.slice(8)})[0],Ak=h.indexOf('artist-')===0&&ARTISTS[h.slice(7)];
     var Fm=h.indexOf('film-')===0&&filmById(h.slice(5));
     if(Fm)document.title=Fm.title+' · Sound for Picture · Internet Wedding';else if(h==='sfp')document.title='Sound for Picture · Internet Wedding';else if(R)document.title=R.title+' · '+ARTISTS[R.artist].name+' · Internet Wedding';else if(Ak)document.title=Ak.name+' · Internet Wedding';else if(pageOf(h)==='home')document.title='Internet Wedding · Independent record label, Istanbul'})();
-  linkify(); bindApply(); bindCatalogue(); reveal(); mwInit(); iwAnimInit();
+  linkify(); bindApply(); bindJobForm(); bindCatalogue(); reveal(); mwInit(); iwAnimInit();
   if(keepScroll) return;
   if(sectionTarget){var el=document.getElementById(sectionTarget); if(el) el.scrollIntoView()} else window.scrollTo(0,0);
 }
