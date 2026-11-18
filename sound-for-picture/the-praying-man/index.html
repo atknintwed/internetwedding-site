@@ -1237,7 +1237,7 @@ function bindJobForm(){
     add('_next',location.origin+location.pathname+'?sent=1');add('_honey','');
     add('Role',role);add('Name',v('j-name'));add('Email',v('j-email'));add('About',v('j-about'));add('Portfolio link',v('j-link')||'-');
     add('Files',[cv&&('CV: '+cv.name),pf&&('Portfolio: '+pf.name)].filter(Boolean).join(' · '));add('Language',lang);
-    document.getElementById('j-cv').name='attachment';document.getElementById('j-pf').name=pf?'attachment':'';
+    document.getElementById('j-cv').name='attachment';document.getElementById('j-pf').name=pf?'attachment2':'';
     f.action='https://formsubmit.co/'+WORK_EMAIL;f.method='POST';f.enctype='multipart/form-data';
     HTMLFormElement.prototype.submit.call(f);
     return;
