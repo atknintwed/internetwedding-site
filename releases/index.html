@@ -1273,7 +1273,7 @@ function ftile(f){
 }
 function sfpPage(){
   var x=t(), s=x.sfp;
-  return pageHead('var(--green)','var(--white)',s.lbl,'Sound for Picture','en')
+  return pageHead('var(--green)','var(--black)',s.lbl,'Sound for Picture','en')
    +'<section class="in" style="padding-top:56px;padding-bottom:64px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:40px 64px" id="about-body">'
    +'<p class="hd rv" style="font-size:clamp(30px,3.8vw,56px);line-height:1.08;margin:0">'+s.lead+'</p>'
    +'<div style="display:flex;flex-direction:column;gap:20px;font-size:19px;line-height:1.55;max-width:58ch"><p class="rv" style="margin:0">'+s.p1+'</p><p class="rv" style="margin:0">'+s.p2+'</p></div></section>'
@@ -1460,7 +1460,7 @@ function wipeColor(h){
   if(h.indexOf('artist-')===0){var a=ARTISTS[h.slice(7)];if(a)return [a.hero,a.fg]}
   if(h==='catalogue')return ['#87BCF4','#1A1A1A'];
   if(h==='apply')return ['#E9FF8A','#1A1A1A'];
-  if(h==='sfp')return ['#14724C','#FFFFFF'];
+  if(h==='sfp')return ['#14724C','#1A1A1A'];
   if(h.indexOf('film-')===0)return ['#1A1A1A','#FFFFFF'];
   return ['#F763D8','#1A1A1A'];
 }
