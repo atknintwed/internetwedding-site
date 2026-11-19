@@ -529,6 +529,16 @@ var LOGO_STACK_W = "<svg role=\"img\" aria-label=\"Internet Wedding\" xmlns=\"ht
 var EMAIL = 'info@internetweddingmusic.com';
 var WORK_EMAIL = 'work@internetweddingmusic.com';
 var SUBMIT_EMAIL = 'atakan@internetweddingmusic.com';
+// Formlar Google Apps Script'e gider (19 Kasım 2026): dosyalar Drive'a, satır Sheet'e, e-posta work@/atakan@'e. Kaynak: calisma/web-sitesi/apps-script/
+var FORMS_URL = 'https://script.google.com/macros/s/AKfycbwvfx8mO5N27G3jZKnvEQIsqSlwg5uWRz6H_pdNRGSK3qB6-HE21i-iXaN8UkUboAhl/exec';
+function sendForm(form,fields,files){
+  return Promise.all((files||[]).filter(Boolean).map(function(fl){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res({name:fl.name,type:fl.type,data:String(r.result).split(',')[1]||''})};r.onerror=rej;r.readAsDataURL(fl)})}))
+  .then(function(enc){
+    var ctl=('AbortController' in window)?new AbortController():null, tm=ctl&&setTimeout(function(){ctl.abort()},120000);
+    return fetch(FORMS_URL,{method:'POST',body:JSON.stringify({form:form,fields:fields,files:enc,hp:''}),signal:ctl?ctl.signal:undefined})
+      .then(function(r){return r.json()}).then(function(j){if(tm)clearTimeout(tm);if(!j||!j.ok)throw 0;return j});
+  });
+}
 
 var T = {
  en:{
@@ -587,7 +597,7 @@ var T = {
   aboutText:'Internet Wedding is a label from Istanbul for artists who make records on their own terms. We step in where the project needs help and look after the artist’s rights along the way.',
   catalogue:'Catalogue',
   sendLbl:'Submissions', sendH:'Send us your music', sendText:'We listen to everything that comes in. Tell us who you are and what you’re working on.', sendBtn:'Submission form',
-  contact:'Contact', city:'Istanbul', newsletter:'Newsletter', nlText:'New releases and listening sessions. Twice a month at most.', nlPh:'name@example.com', nlBtn:'Subscribe', nlDone:'Thanks. This is a preview of the site, so nothing was sent yet.',
+  contact:'Contact', city:'Istanbul', newsletter:'Newsletter', nlText:'New releases and listening sessions. Twice a month at most.', nlPh:'name@example.com', nlBtn:'Subscribe', nlDone:'Thanks, you’re on the list.', nlErr:'That didn’t work. Check the address and try again.',
   pattern:'Pattern',
   allReleases:'All releases', allArtists:'All artists',
   listen:'Listen', tracklist:'Tracklist', credits:'Credits', more:'More releases',
@@ -603,7 +613,7 @@ var T = {
     name:'Artist or band name', msg:'In your own words', msgHint:'Tell us about you and the music: what it’s about, where it’s going, what you need from us.', link:'Link to your music', linkHint:'Spotify, SoundCloud, Bandcamp or a private link', email:'Email', req:'Required',
     needs:'What do you need?', needsText:'Not sure? Leave it blank. Working that out together is part of what we do.',
     n:[['Production','Recording, arrangement, mixing and mastering.'],['Release and distribution','Release planning and distribution, with rights registration.'],['Agency','Creative direction, visual identity, video and campaigns, plus management and booking.']],
-    img:'Image', imgText:'Cover art or an artist photo. Optional.', upload:'Upload an image', uploadHint:'JPG or PNG, at least 1000 px',
+    img:'Image', imgText:'Cover art or an artist photo. Optional.', upload:'Upload an image', uploadHint:'JPG or PNG, at least 1000 px, up to 5 MB', eImg:'Use a JPG or PNG under 5 MB.',
     opt:'Optional', nl:'Send me the newsletter',
     send:'Send', sendText:'We reply by email.', submit:'Send submission', cancel:'Cancel',
     eName:'Add your artist or band name.', eLink:'Add a link where we can hear your music.', eEmail:'Add an email address we can reply to, like name@example.com.',
@@ -665,7 +675,7 @@ var T = {
   aboutText:'<span lang="en">Internet Wedding</span>, kayıtlarını kendi bildiği gibi yapan sanatçılar için İstanbul’dan bir plak şirketi. Projenin yardıma ihtiyaç duyduğu yerde devreye giriyor, bu sırada sanatçının haklarını gözetiyoruz.',
   catalogue:'Katalog',
   sendLbl:'Başvurular', sendH:'Müziğini gönder', sendText:'Gelen her şeyi dinliyoruz. Kim olduğunu ve üzerinde çalıştığın işi anlat.', sendBtn:'Başvuru formu',
-  contact:'İletişim', city:'İstanbul', newsletter:'Bülten', nlText:'Yeni yayınlar ve dinleme etkinlikleri. Ayda en fazla iki e-posta.', nlPh:'ad@ornek.com', nlBtn:'Abone ol', nlDone:'Teşekkürler. Bu sitenin önizlemesi, henüz bir şey gönderilmedi.',
+  contact:'İletişim', city:'İstanbul', newsletter:'Bülten', nlText:'Yeni yayınlar ve dinleme etkinlikleri. Ayda en fazla iki e-posta.', nlPh:'ad@ornek.com', nlBtn:'Abone ol', nlDone:'Teşekkürler, listeye eklendin.', nlErr:'Olmadı. Adresi kontrol edip tekrar dene.',
   pattern:'Desen',
   allReleases:'Tüm yayınlar', allArtists:'Tüm sanatçılar',
   listen:'Dinle', tracklist:'Parça listesi', credits:'Künye', more:'Diğer yayınlar',
@@ -681,7 +691,7 @@ var T = {
     name:'Sanatçı ya da grup adı', msg:'Kendi sözlerinle', msgHint:'Bize kendinden ve müziğinden bahset: ne anlatıyor, nereye gidiyor, bizden ne bekliyorsun.', link:'Müziğinin linki', linkHint:'Spotify, SoundCloud, Bandcamp ya da özel bir link', email:'E-posta', req:'Zorunlu',
     needs:'Neye ihtiyacın var?', needsText:'Emin değilsen boş bırak. Bunu birlikte bulmak işimizin bir parçası.',
     n:[['Prodüksiyon','Kayıt, aranje, miks ve mastering.'],['Yayın ve dağıtım','Yayın planı ve dağıtım, hak kayıtlarıyla birlikte.'],['Ajans','Kreatif yönetim, görsel kimlik, video ve kampanya; menajerlik ve booking da dahil.']],
-    img:'Görsel', imgText:'Kapak ya da sanatçı fotoğrafı. İsteğe bağlı.', upload:'Görsel yükle', uploadHint:'JPG ya da PNG, en az 1000 px',
+    img:'Görsel', imgText:'Kapak ya da sanatçı fotoğrafı. İsteğe bağlı.', upload:'Görsel yükle', uploadHint:'JPG ya da PNG, en az 1000 px, en fazla 5 MB', eImg:'5 MB’tan küçük bir JPG ya da PNG yükle.',
     opt:'İsteğe bağlı', nl:'Bülteni almak istiyorum',
     send:'Gönder', sendText:'Dönüşü e-postayla yapıyoruz.', submit:'Başvuruyu gönder', cancel:'Vazgeç',
     eName:'Sanatçı ya da grup adını yaz.', eLink:'Müziğini dinleyebileceğimiz bir link ekle.', eEmail:'Sana dönebileceğimiz bir e-posta adresi yaz, örneğin ad@ornek.com.',
@@ -1054,7 +1064,14 @@ function renderFoot(){
    +'<input class="nl" id="nl" type="email" placeholder="'+x.nlPh+'" autocomplete="email"><button type="button" class="btn" id="nlb" style="justify-content:center">'+x.nlBtn+'</button><span id="nlm" role="status" style="color:var(--lime)"></span></div></div></div>'
    +'<div class="fbar lbl"><span style="display:flex;align-items:center;gap:14px">'+art('iwfill',{label:'Internet Wedding',ink:'#FFFFFF',paper:'#1A1A1A'})+'<span>© 2026 <span lang="en">Internet Wedding</span></span></span>'
    +'</div></div>';
-  document.getElementById('nlb').onclick=function(){document.getElementById('nlm').textContent=t().nlDone};
+  document.getElementById('nlb').onclick=function(){
+    var b=this,inp=document.getElementById('nl'),m=document.getElementById('nlm'),em=inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){m.textContent=t().nlErr;inp.focus();return}
+    if(b.disabled) return; b.disabled=true; m.textContent='…';
+    sendForm('newsletter',{Email:em,Language:lang,Page:location.pathname},[])
+      .then(function(){m.textContent=t().nlDone;inp.value=''}).catch(function(){m.textContent=t().nlErr}).then(function(){b.disabled=false});
+  };
+  document.getElementById('nl').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();document.getElementById('nlb').click()}});
 }
 
 function home(){
@@ -1221,7 +1238,6 @@ function bindJobForm(){
   ['j-name','j-email','j-about'].forEach(function(id){document.getElementById(id).addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')chk(id)})});
   ['j-cv','j-pf'].forEach(function(id){var lbl=id==='j-cv'?x.cv:x.pf;document.getElementById(id).addEventListener('change',function(){document.getElementById(id+'-n').textContent=this.files[0]?this.files[0].name:lbl;chk(id)})});
   var ok=document.getElementById('j-ok'),er=document.getElementById('j-err'),btn=f.querySelector('button[type=submit]');
-  if(/[?&]sent=1/.test(location.search)){ok.hidden=false;setTimeout(function(){document.getElementById('jf').scrollIntoView({block:'start'});ok.focus()},300)}
   f.addEventListener('submit',function(e){e.preventDefault();
     var first=null;Object.keys(rules).forEach(function(id){if(!chk(id)&&!first)first=id});
     ok.hidden=true;er.hidden=true;
@@ -1230,26 +1246,13 @@ function bindJobForm(){
     var label=btn.textContent;btn.disabled=true;btn.textContent=x.sending;btn.setAttribute('aria-busy','true');
     var v=function(id){return document.getElementById(id).value.trim()};
     var cv=document.getElementById('j-cv').files[0], pf=document.getElementById('j-pf').files[0];
-    // FormSubmit ekleri yalnız normal (AJAX olmayan) form gönderiminde iletiyor (18 Kasım testi)
-    [].forEach.call(f.querySelectorAll('input[data-fs]'),function(i){i.remove()});
-    var add=function(n,val){var i=document.createElement('input');i.type='hidden';i.name=n;i.value=val;i.setAttribute('data-fs','1');f.appendChild(i)};
-    add('_subject','Application: '+role+' · '+v('j-name'));add('_template','table');add('_captcha','false');add('_replyto',v('j-email'));
-    add('_next',location.origin+location.pathname+'?sent=1');add('_honey','');
-    add('Role',role);add('Name',v('j-name'));add('Email',v('j-email'));add('About',v('j-about'));add('Portfolio link',v('j-link')||'-');
-    add('Files',[cv&&('CV: '+cv.name),pf&&('Portfolio: '+pf.name)].filter(Boolean).join(' · '));add('Language',lang);
-    document.getElementById('j-cv').name='attachment';document.getElementById('j-pf').name=pf?'attachment2':'';
-    f.action='https://formsubmit.co/'+WORK_EMAIL;f.method='POST';f.enctype='multipart/form-data';
-    HTMLFormElement.prototype.submit.call(f);
-    return;
-    var ctl=('AbortController' in window)?new AbortController():null, tm=ctl&&setTimeout(function(){ctl.abort()},90000);
-    fetch('https://formsubmit.co/ajax/'+WORK_EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd,signal:ctl?ctl.signal:undefined})
-      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
+    sendForm('job',{Role:role,Name:v('j-name'),Email:v('j-email'),About:v('j-about'),'Portfolio link':v('j-link')||'-',Language:lang},[cv,pf])
       .then(function(){ok.hidden=false;f.reset();document.getElementById('j-cv-n').textContent=x.cv;document.getElementById('j-pf-n').textContent=x.pf;ok.focus()})
       .catch(function(){
         var subj=encodeURIComponent('Application: '+role+' · '+v('j-name'));
         var mail='<a href="mailto:'+WORK_EMAIL+'?subject='+subj+'" style="color:inherit;overflow-wrap:anywhere">'+WORK_EMAIL+'</a>';
         er.innerHTML=esc(x.fail).replace('{mail}',mail);er.hidden=false})
-      .then(function(){if(tm)clearTimeout(tm);btn.disabled=false;btn.textContent=label;btn.removeAttribute('aria-busy')});
+      .then(function(){btn.disabled=false;btn.textContent=label;btn.removeAttribute('aria-busy')});
   });
 }
 
@@ -1397,24 +1400,16 @@ function bindApply(){
   var rules={'f-name':function(v){return v.trim()?'':x.eName},'f-link':function(v){return /^\s*(https?:\/\/)?[^\s.]+\.[^\s]+/.test(v)?'':x.eLink},'f-email':function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?'':x.eEmail}};
   function chk(id){var el=document.getElementById(id),m=rules[id](el.value);document.getElementById(id+'-e').textContent=m;el.setAttribute('aria-invalid',m?'true':'false');return !m}
   Object.keys(rules).forEach(function(id){document.getElementById(id).addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')chk(id)})});
-  if(/[?&]sent=1/.test(location.search)){var ok0=document.getElementById('f-ok');ok0.hidden=false;setTimeout(function(){ok0.scrollIntoView({block:'center'})},300)}
   f.addEventListener('submit',function(e){e.preventDefault();var first=null;Object.keys(rules).forEach(function(id){if(!chk(id)&&!first)first=id});
     var ok=document.getElementById('f-ok'),er=document.getElementById('f-err'),btn=f.querySelector('button[type=submit]');ok.hidden=true;er.hidden=true;
     if(first){document.getElementById(first).focus();return}
+    var img0=document.getElementById('f-img').files[0];
+    if(img0&&(img0.size>5*1024*1024||!/\.(jpe?g|png)$/i.test(img0.name))){document.getElementById('f-img-name').textContent=x.eImg;document.getElementById('f-img').focus();return}
     if(btn.disabled) return;
     var label=btn.textContent;btn.disabled=true;btn.textContent=x.sending;
     var needs=[].slice.call(f.querySelectorAll('[id^=need]:checked')).map(function(c){return c.parentNode.querySelector('b').textContent});
-    var fd=new FormData(), v=function(id){return document.getElementById(id).value.trim()}, img=document.getElementById('f-img').files[0];
-    fd.append('_subject','Submit Music: '+v('f-name'));fd.append('_template','table');fd.append('_captcha','false');fd.append('_replyto',v('f-email'));
-    fd.append('Artist',v('f-name'));fd.append('Music link',v('f-link'));fd.append('Email',v('f-email'));fd.append('Message',v('f-msg')||'-');fd.append('Needs',needs.join(', ')||'-');fd.append('Newsletter',document.getElementById('f-nl').checked?'Yes':'No');fd.append('Language',lang);
-    [].forEach.call(f.querySelectorAll('input[data-fs]'),function(i){i.remove()});
-    fd.append('_next',location.origin+location.pathname+'?sent=1');fd.append('_honey','');
-    fd.forEach(function(val,n){var i=document.createElement('input');i.type='hidden';i.name=n;i.value=val;i.setAttribute('data-fs','1');f.appendChild(i)});
-    document.getElementById('f-img').name=img?'attachment':'';
-    f.action='https://formsubmit.co/'+SUBMIT_EMAIL;f.method='POST';f.enctype='multipart/form-data';
-    HTMLFormElement.prototype.submit.call(f);
-    return;
-    fetch('https://formsubmit.co/ajax/'+SUBMIT_EMAIL,{method:'POST',headers:{'Accept':'application/json'},body:fd}).then(function(r){return r.json().catch(function(){return {}}).then(function(j){if(!r.ok||j.success==='false'||j.success===false)throw 0})})
+    var v=function(id){return document.getElementById(id).value.trim()}, img=document.getElementById('f-img').files[0];
+    sendForm('submit',{Artist:v('f-name'),'Music link':v('f-link'),Email:v('f-email'),Message:v('f-msg')||'-',Needs:needs.join(', ')||'-',Newsletter:document.getElementById('f-nl').checked?'Yes':'No',Language:lang},[img])
       .then(function(){ok.hidden=false;f.reset();document.getElementById('f-img-name').textContent=x.upload;ok.focus&&ok.scrollIntoView({block:'nearest'})})
       .catch(function(){er.hidden=false})
       .then(function(){btn.disabled=false;btn.textContent=label});
