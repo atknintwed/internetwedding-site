@@ -247,7 +247,7 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
 .mmenu .mlinks{display:flex;flex-direction:column;padding:8px 16px 0;flex:1}
 .mmenu .mlinks a{font-family:"IW Rounded",Arial,sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(40px,12vw,76px);line-height:1.1;text-decoration:none;border-bottom:2px solid var(--black);padding:10px 0 6px}
 .mmenu .mlinks a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:4px;text-underline-offset:8px}
-.mmenu .mfoot{padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.mmenu .mfoot{padding:24px 16px calc(96px + env(safe-area-inset-bottom,0px))}
 .mmenu .btn{width:100%;justify-content:space-between}
 
 /* page change: the screen softly fills with the destination colour while one unit of the pattern breathes
@@ -389,7 +389,7 @@ textarea.tx{min-height:150px;resize:vertical;font:inherit;line-height:1.45;paddi
   .top .in{column-gap:12px}
   #cta{display:none}
   .nav{display:none}
-  .menu-btn{display:inline-flex;align-items:center}
+  .menu-btn{display:inline-flex;align-items:center;justify-content:center;min-width:84px}
   .top .in{flex-wrap:nowrap}
   .tools{gap:8px}
   .crow{grid-template-columns:56px minmax(0,1fr);gap:4px 14px}
@@ -1245,7 +1245,7 @@ function bindJobForm(){
     ok.hidden=true;er.hidden=true;
     if(first){document.getElementById(first).focus();return}
     if(btn.disabled) return;
-    var label=btn.textContent;btn.disabled=true;btn.textContent=x.sending;btn.setAttribute('aria-busy','true');
+    var label=btn.textContent;btn.style.minWidth=btn.offsetWidth+'px';btn.disabled=true;btn.textContent=x.sending;btn.setAttribute('aria-busy','true');
     var v=function(id){return document.getElementById(id).value.trim()};
     var cv=document.getElementById('j-cv').files[0], pf=document.getElementById('j-pf').files[0];
     sendForm('job',{Role:role,Name:v('j-name'),Email:v('j-email'),About:v('j-about'),'Portfolio link':v('j-link')||'-',Language:lang},[cv,pf])
@@ -1408,7 +1408,7 @@ function bindApply(){
     var img0=document.getElementById('f-img').files[0];
     if(img0&&(img0.size>5*1024*1024||!/\.(jpe?g|png)$/i.test(img0.name))){document.getElementById('f-img-name').textContent=x.eImg;document.getElementById('f-img').focus();return}
     if(btn.disabled) return;
-    var label=btn.textContent;btn.disabled=true;btn.textContent=x.sending;
+    var label=btn.textContent;btn.style.minWidth=btn.offsetWidth+'px';btn.disabled=true;btn.textContent=x.sending;
     var needs=[].slice.call(f.querySelectorAll('[id^=need]:checked')).map(function(c){return c.parentNode.querySelector('b').textContent});
     var v=function(id){return document.getElementById(id).value.trim()}, img=document.getElementById('f-img').files[0];
     sendForm('submit',{Artist:v('f-name'),'Music link':v('f-link'),Email:v('f-email'),Message:v('f-msg')||'-',Needs:needs.join(', ')||'-',Newsletter:document.getElementById('f-nl').checked?'Yes':'No',Language:lang},[img])
